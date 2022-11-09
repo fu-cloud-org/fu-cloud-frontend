@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <div class="box"> {{billboard.content}} </div>
+  <div class="container">
+    <div class="box"> 🔔 {{billboard.content}} </div>
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <topic-list-view/>
+      </div>
+      <div class="column">
+        <card-bar/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -8,9 +16,12 @@
 // @ is an alias to /src
 
 import {getBillbooard} from "@/api/billboard";
+import TopicListView from "@/views/post/Index";
+import CardBar from "@/views/card/CardBar";
 
 export default {
   name: 'HomeView',
+  components: {CardBar, TopicListView},
   data () {
     return {
       billboard: {
