@@ -1,6 +1,13 @@
 <template>
   <div>
-    帖子列表
+    <el-card>
+      <div slot="header">
+        帖子列表
+      </div>
+      <div>
+        detail
+      </div>
+    </el-card>
   </div>
 </template>
 
