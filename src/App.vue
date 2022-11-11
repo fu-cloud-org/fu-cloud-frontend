@@ -1,28 +1,39 @@
 <template>
   <div>
     <div class="mb-5">
-      <Header></Header>
+      <Header/>
     </div>
-
-    <router-view :key="this.$route.fullPath"></router-view>
-
-    <div>
-
+    <div class="main-container">
+      <div class="body-wrap">
+        <router-view :key="this.$route.fullPath"></router-view>
+      </div>
+      <Footer id="footer"/>
     </div>
   </div>
 </template>
 
 <script>
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default {
   name: "App",
-  components: { Header },
+  components: {Footer, Header },
 };
 </script>
 
 <style>
-.container {
-  min-height: 500px;
+.main-container {
+  position: relative;
+  min-height: 100vh;
+}
+.body-wrap {
+  padding-bottom: 2.5rem;
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="box"> {{billboard.content}} </div>
+    <div class="box"> <i class="el-icon-bell" style="font-size: 20px"/>&nbsp; {{billboard.content}} </div>
     <div class="columns">
       <div class="column is-three-quarters">
         <topic-list-view/>

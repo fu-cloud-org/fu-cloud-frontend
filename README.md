@@ -14,7 +14,7 @@
   - [x] 注册登录页面
   - [x] `axios` 配置拦截器
   - [x] 侧边栏，登入板块
-  - [ ] header、footer
+  - [x] header、footer
   - 帖子
     - [ ] 帖子列表
     - [ ] 帖子详情
