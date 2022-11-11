@@ -10,9 +10,9 @@ const mutations = {
     SET_TOKEN_STATE: (state, token) => {
         state.token = token;
     },
-    // SET_USER_STATE: (state, user) => {
-    //     state.user = user;
-    // },
+    SET_USER_STATE: (state, user) => {
+        state.user = user;
+    },
 };
 
 const actions = {

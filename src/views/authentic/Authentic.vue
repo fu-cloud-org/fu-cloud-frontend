@@ -70,7 +70,7 @@
             ></el-input>
           </el-form-item>
 
-          <el-form-item label="记住密码" prop="delivery">
+          <el-form-item label="自动登录" prop="delivery">
             <el-switch v-model="ruleForm.rememberMe"></el-switch>
           </el-form-item>
 
@@ -262,20 +262,6 @@ export default {
 </script>
 
 <style scoped>
-.el-form-item {
-  margin-right: 0 !important;
-}
-.el-form-item__label {
-  position: absolute;
-}
-.el-form-item__content {
-  width: 100%;
-  padding-left: 80px;
-}
-.el-select,
-.el-input_inner {
-  width: 100%;
-}
 * {
   box-sizing: border-box;
 }
@@ -385,6 +371,12 @@ button {
   transition: transform 80ms ease-in;
   cursor: pointer;
 }
+.el-button {
+  color: white;
+  background-color: #409EFF !important;
+  border-color: #409EFF !important;
+}
+
 
 button:active {
   transform: scale(.95);
