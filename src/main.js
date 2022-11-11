@@ -13,6 +13,11 @@ Vue.use(Buefy);
 
 Vue.config.productionTip = false
 
+router.beforeEach((to, from, next) => {
+  window.document.title = to.meta.title === undefined?'福云':to.meta.title
+  next();
+})
+
 new Vue({
   router,
   store,

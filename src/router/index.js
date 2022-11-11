@@ -16,13 +16,19 @@ const routes = [
     path: '/authentic',
     name: 'Authentic',
     component: Authentic,
-    meta: {title : '欢迎加入福云'}
+    meta: {
+      title : '欢迎加入福云',
+      keepAlive: true
+    }
   },
   {
     path: '/404',
     name: '404',
     component: View404,
-    meta: {title: '404 Not-Found'}
+    meta: {
+      title: '你迷路啦',
+      keepAlive: true
+    }
   },
   {
     path: '*',

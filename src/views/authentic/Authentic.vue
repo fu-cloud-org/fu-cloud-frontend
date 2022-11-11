@@ -6,14 +6,14 @@
             :model="ruleForm"
             ref="ruleForm"
             v-loading="loading"
-            label-position="right"
+            label-position="left"
             status-icon
             :rules="rules"
-            label-width="90px"
+            label-width="85px"
             class="demo-ruleForm"
         >
           <h1>Sign Up</h1>
-          <el-form-item label="用户名" prop="name">
+          <el-form-item label="用户名" prop="name" >
             <el-input v-model="ruleForm.name" placeholder="2-15个字符"/>
           </el-form-item>
 
@@ -31,11 +31,12 @@
                 v-model="ruleForm.checkPass"
                 type="password"
                 autocomplete="off"
+                placeholder="请确认您的密码"
             />
           </el-form-item>
 
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="ruleForm.email" autocomplete="off" />
+            <el-input v-model="ruleForm.email" autocomplete="on" />
           </el-form-item>
 
 
@@ -181,6 +182,20 @@ export default {
 </script>
 
 <style scoped>
+.el-form-item {
+  margin-right: 0 !important;
+}
+.el-form-item__label {
+  position: absolute;
+}
+.el-form-item__content {
+  width: 100%;
+  padding-left: 80px;
+}
+.el-select,
+.el-input_inner {
+  width: 100%;
+}
 * {
   box-sizing: border-box;
 }
