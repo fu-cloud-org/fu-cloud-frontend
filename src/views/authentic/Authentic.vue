@@ -3,23 +3,23 @@
       <div class="form-container sign-up-container">
         <el-form
             size="small"
-            :model="ruleForm"
-            ref="ruleForm"
-            v-loading="loading"
+            :model="upRuleForm"
+            ref="upRuleForm"
+            v-loading="up_loading"
             label-position="left"
             status-icon
-            :rules="rules"
+            :rules="upRules"
             label-width="85px"
             class="demo-ruleForm"
         >
           <h1>Sign Up</h1>
           <el-form-item label="用户名" prop="name" >
-            <el-input v-model="ruleForm.name" placeholder="2-15个字符"/>
+            <el-input v-model="upRuleForm.name" placeholder="2-15个字符"/>
           </el-form-item>
 
           <el-form-item label="密码" prop="pass">
             <el-input
-                v-model="ruleForm.pass"
+                v-model="upRuleForm.pass"
                 type="password"
                 autocomplete="off"
                 placeholder="2-16位"
@@ -28,7 +28,7 @@
 
           <el-form-item label="确认密码" prop="checkPass">
             <el-input
-                v-model="ruleForm.checkPass"
+                v-model="upRuleForm.checkPass"
                 type="password"
                 autocomplete="off"
                 placeholder="请确认您的密码"
@@ -36,26 +36,50 @@
           </el-form-item>
 
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="ruleForm.email" autocomplete="on" />
+            <el-input v-model="upRuleForm.email" autocomplete="on" />
           </el-form-item>
-
-
             <el-button
-                @click="submitForm('ruleForm')"
+                @click="submitUpForm('upRuleForm')"
             >注册</el-button>
 <!--            <el-button @click="resetForm('ruleForm')">重置</el-button>-->
         </el-form>
+      </div>
 
-      </div>
       <div class="form-container sign-in-container">
-        <form action="#">
+        <el-form
+            size="small"
+            label-position="left"
+            v-loading="loading"
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="ruleForm"
+            label-width="85px"
+            class="demo-ruleForm"
+        >
           <h1>Sign In</h1>
-          <input type="email" placeholder="电子邮箱">
-          <input type="password" placeholder="密码">
-          <a href="#">忘记密码？</a>
-          <button>登录</button>
-        </form>
+          <el-form-item label="用户名" prop="name">
+            <el-input v-model="ruleForm.name"></el-input>
+          </el-form-item>
+
+          <el-form-item label="密码" prop="pass">
+            <el-input
+                type="password"
+                v-model="ruleForm.pass"
+                autocomplete="off"
+            ></el-input>
+          </el-form-item>
+
+          <el-form-item label="记住密码" prop="delivery">
+            <el-switch v-model="ruleForm.rememberMe"></el-switch>
+          </el-form-item>
+
+          <el-button type="primary" @click="submitForm('ruleForm')"
+          >登录</el-button
+          >
+        </el-form>
       </div>
+
       <div class="overlay-container">
         <div class="overlay">
           <div class="overlay-panel overlay-left">
@@ -94,27 +118,56 @@ export default {
     const validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.ruleForm.pass) {
+      } else if (value !== this.upRuleForm.pass) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
       }
     }
     return {
+      // 登录
+      redirect: undefined,
       loading: false,
       ruleForm: {
+        name: "",
+        pass: "",
+        rememberMe: true,
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入账号", trigger: "blur" },
+          {
+            min: 2,
+            max: 15,
+            message: "长度在 2 到 15 个字符",
+            trigger: "blur",
+          },
+        ],
+        pass: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 20,
+            message: "长度在 6 到 20 个字符",
+            trigger: "blur",
+          },
+        ],
+      },
+      // 注册
+      up_loading: false,
+      upRuleForm: {
         name: '',
         pass: '',
         checkPass: '',
         email: ''
       },
-      rules: {
+      upRules: {
         name: [
-          { required: true, message: '请输入账号', trigger: 'blur' },
+          { required: true, message: '请输入用户名', trigger: 'blur' },
           {
             min: 2,
-            max: 10,
-            message: '长度在 2 到 10 个字符',
+            max: 15,
+            message: '长度在 2 到 15 个字符',
             trigger: 'blur'
           }
         ],
@@ -143,11 +196,38 @@ export default {
     }
   },
   methods: {
+    // 登录
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.loading = true
-          register(this.ruleForm)
+          this.loading = true;
+          this.$store
+              .dispatch("user/login", this.ruleForm)
+              .then(() => {
+                this.$message({
+                  message: "恭喜你，登录成功",
+                  type: "success",
+                  duration: 2000,
+                });
+                setTimeout(() => {
+                  this.loading = false;
+                  this.$router.push({ path: this.redirect || "/" });
+                }, 0.1 * 1000);
+              })
+              .catch(() => {
+                this.loading = false;
+              });
+        } else {
+          return false;
+        }
+      });
+    },
+    // 注册
+    submitUpForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.up_loading = true
+          register(this.upRuleForm)
               .then((value) => {
                 const { code, message } = value
                 if (code === 200) {
@@ -156,7 +236,7 @@ export default {
                     type: 'success'
                   })
                   setTimeout(() => {
-                    this.loading = false
+                    this.up_loading = false
                     // this.$router.push({ path: this.redirect || '/login' })
                     let container = document.getElementById('loginRe');
                     container.classList.remove('right-panel-active')
@@ -167,7 +247,7 @@ export default {
                 }
               })
               .catch(() => {
-                this.loading = false
+                this.up_loading = false
               })
         } else {
           return false
