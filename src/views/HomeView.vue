@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="box"> 🔔 {{billboard.content}} </div>
+    <div class="box"> {{billboard.content}} </div>
     <div class="columns">
       <div class="column is-three-quarters">
         <topic-list-view/>

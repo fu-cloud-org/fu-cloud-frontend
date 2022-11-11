@@ -2,7 +2,7 @@
     <div class="loginRe" id="loginRe">
       <div class="form-container sign-up-container">
         <el-form
-            size="small"
+            size="medium"
             :model="upRuleForm"
             ref="upRuleForm"
             v-loading="up_loading"
@@ -14,11 +14,13 @@
         >
           <h1>Sign Up</h1>
           <el-form-item label="用户名" prop="name" >
-            <el-input v-model="upRuleForm.name" placeholder="2-15个字符"/>
+            <el-input v-model="upRuleForm.name" placeholder="2-15个字符" style="width: 220px"/>
           </el-form-item>
 
           <el-form-item label="密码" prop="pass">
             <el-input
+                show-password="true"
+                style="width: 220px"
                 v-model="upRuleForm.pass"
                 type="password"
                 autocomplete="off"
@@ -28,6 +30,8 @@
 
           <el-form-item label="确认密码" prop="checkPass">
             <el-input
+                show-password="true"
+                style="width: 220px"
                 v-model="upRuleForm.checkPass"
                 type="password"
                 autocomplete="off"
@@ -36,7 +40,7 @@
           </el-form-item>
 
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="upRuleForm.email" autocomplete="on" />
+            <el-input v-model="upRuleForm.email" autocomplete="on" style="width: 220px"/>
           </el-form-item>
             <el-button
                 @click="submitUpForm('upRuleForm')"
@@ -59,11 +63,12 @@
         >
           <h1>Sign In</h1>
           <el-form-item label="用户名" prop="name">
-            <el-input v-model="ruleForm.name"></el-input>
+            <el-input v-model="ruleForm.name" style="width: 220px"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="pass">
             <el-input
+                style="width: 220px"
                 type="password"
                 v-model="ruleForm.pass"
                 autocomplete="off"
@@ -493,5 +498,9 @@ button.ghost {
 /* Same effect for right */
 .loginRe.right-panel-active .overlay-right {
   transform: translateY(20%);
+}
+::v-deep .el-input__inner {
+  border-radius: 23px;
+  height: 45px;
 }
 </style>

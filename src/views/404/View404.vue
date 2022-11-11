@@ -16,7 +16,7 @@ export default {
   name: "View404",
   data() {
     return {
-      times: 10
+      times: 5
     }
   },
   created() {
