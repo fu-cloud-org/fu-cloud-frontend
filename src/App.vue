@@ -4,9 +4,7 @@
       <Header></Header>
     </div>
 
-
     <router-view :key="this.$route.fullPath"></router-view>
-
 
     <div>
 

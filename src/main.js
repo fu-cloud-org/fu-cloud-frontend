@@ -7,16 +7,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import '@/assets/css/app.css'
+import '@/permission'
 
 Vue.use(ElementUI);
 Vue.use(Buefy);
 
 Vue.config.productionTip = false
-
-router.beforeEach((to, from, next) => {
-  window.document.title = to.meta.title === undefined?'福云':to.meta.title
-  next();
-})
 
 new Vue({
   router,

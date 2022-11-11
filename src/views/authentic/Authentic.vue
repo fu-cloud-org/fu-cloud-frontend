@@ -24,7 +24,7 @@
                 v-model="upRuleForm.pass"
                 type="password"
                 autocomplete="off"
-                placeholder="2-16位"
+                placeholder="6-20位"
             />
           </el-form-item>
 
@@ -43,6 +43,7 @@
             <el-input v-model="upRuleForm.email" autocomplete="on" style="width: 220px"/>
           </el-form-item>
             <el-button
+                type="primary"
                 @click="submitUpForm('upRuleForm')"
             >注册</el-button>
 <!--            <el-button @click="resetForm('ruleForm')">重置</el-button>-->

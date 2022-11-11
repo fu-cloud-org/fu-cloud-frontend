@@ -1,6 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header">
+      <i class="el-icon-coin"></i> &nbsp
       <span>每日赠言</span>
     </div>
     <div>
