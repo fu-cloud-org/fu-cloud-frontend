@@ -12,14 +12,6 @@
           <img :src="fu_cloud_icon" alt="logo">
           &nbsp 福云
         </b-navbar-item>
-
-<!--        <b-navbar-item-->
-<!--            class="is-hidden-desktop"-->
-<!--            tag="router-link"-->
-<!--            :to="{ path: '/' }"-->
-<!--        >-->
-<!--          主页-->
-<!--        </b-navbar-item>-->
       </template>
 
       <template slot="end">
