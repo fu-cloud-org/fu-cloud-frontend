@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
-import {getToken} from "@/utils/auth";
+import { getToken } from '@/utils/auth'
 
 // 1.创建axios实例
 const service = axios.create({
-    // 公共接口,url = base url + request url
+    // 公共接口--这里注意后面会讲,url = base url + request url
     baseURL: process.env.VUE_APP_SERVER_URL,
 
     // baseURL: 'https://api.example.com',

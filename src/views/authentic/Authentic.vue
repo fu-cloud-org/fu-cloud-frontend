@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { register } from '@/api/user'
+import { register } from '@/api/auth'
 export default {
   name: "Authentic",
   mounted() {
@@ -209,6 +209,9 @@ export default {
                   type: "success",
                   duration: 2000,
                 });
+                // 测试header 是否包含jwt
+                // this.$store.dispatch("user/getInfo")
+
                 setTimeout(() => {
                   this.loading = false;
                   this.$router.push({ path: this.redirect || "/" });
