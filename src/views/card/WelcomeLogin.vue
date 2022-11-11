@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <div slot="header">
-      <i class="el-icon-edit"></i> &nbsp;
+      <i class="el-icon-edit" style="font-size: 20px"></i> &nbsp;
       <span>发帖</span>
     </div>
     <div v-if="token != null && token !== ''" class="has-text-centered">

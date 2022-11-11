@@ -71,20 +71,20 @@
               tag="router-link"
               :to="{ path: `/member/${user.username}/home` }"
           >
-            🧘 个人中心
+            <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心
           </b-navbar-item>
           <hr class="dropdown-divider">
           <b-navbar-item
               tag="router-link"
               :to="{ path: `/member/${user.username}/setting` }"
           >
-            ⚙ 设置中心
+            <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
           </b-navbar-item>
           <hr class="dropdown-divider">
           <b-navbar-item
               tag="a"
               @click="logout"
-          > 👋 退出登录
+          > <i class="el-icon-warning" style="font-size: 20px"/>&nbsp; 退出登录
           </b-navbar-item>
         </b-navbar-dropdown>
       </template>
