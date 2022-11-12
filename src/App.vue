@@ -5,6 +5,7 @@
     </div>
     <div class="main-container">
       <div class="body-wrap">
+        <Swiper/>
         <router-view :key="this.$route.fullPath"></router-view>
       </div>
       <Footer id="footer"/>
@@ -15,10 +16,11 @@
 <script>
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import Swiper from "@/components/Swiper";
 
 export default {
   name: "App",
-  components: {Footer, Header },
+  components: {Swiper, Footer, Header },
 };
 </script>
 
