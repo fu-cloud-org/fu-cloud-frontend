@@ -3,6 +3,8 @@ import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
 
+const BASE_URL = process.env.VUE_APP_SERVER_URL
+
 // 1.创建axios实例
 const service = axios.create({
     // 公共接口--这里注意后面会讲,url = base url + request url
@@ -78,4 +80,9 @@ service.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+
+export function getBaseURL() {
+    return BASE_URL;
+}
+
 export default service

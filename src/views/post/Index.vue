@@ -7,7 +7,7 @@
             <article v-for="(item, index) in articleList" :key="index" class="media">
               <div class="media-left">
                 <figure class="image is-48x48">
-                  <img :src="`https://cn.gravatar.com/avatar/${item.userId}?s=164&d=monsterid`" style="border-radius: 5px;">
+                  <img :src="attachImg(item.cover)" style="border-radius: 5px;">
                 </figure>
               </div>
               <div class="media-content">
@@ -53,7 +53,7 @@
             <article v-for="(item, index) in articleList" :key="index" class="media">
               <div class="media-left">
                 <figure class="image is-48x48">
-                  <img :src="`https://cn.gravatar.com/avatar/${item.userId}?s=164&d=monsterid`" style="border-radius: 5px;">
+                  <img :src="attachImg(item.cover)" style="border-radius: 5px;">
                 </figure>
               </div>
               <div class="media-content">
@@ -112,6 +112,7 @@
 <script>
 import { getList } from '@/api/post'
 import Pagination from '@/components/Pagination'
+import {attachImg} from "@/utils/attachImg";
 
 export default {
   name: 'IndexView',
@@ -120,6 +121,7 @@ export default {
   },
   data () {
     return {
+      attachImg: attachImg,
       activeName: 'latest',
       articleList: [],
       page: {
