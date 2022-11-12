@@ -3,14 +3,22 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import View404 from "@/views/404/View404";
 import Authentic from "@/views/authentic/Authentic";
+import MainContainer from "@/views/MainContainer";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'mainContainer',
+    component: MainContainer,
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+      },
+    ]
   },
   {
     path: '/authentic',
