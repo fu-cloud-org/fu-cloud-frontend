@@ -1,10 +1,10 @@
 <template>
-  <el-backtop :bottom="60" :right="60">
+  <el-backtop :bottom="60" :right="200">
     <div title="回到顶部"
          style="{
         height: 100%;
         width: 100%;
-        background-color: #f2f5f6;
+        background-color: lightgray;
         box-shadow: 0 1px 0 0;
         border-radius: 12px;
         text-align: center;
