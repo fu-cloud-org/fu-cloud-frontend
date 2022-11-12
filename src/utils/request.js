@@ -51,7 +51,7 @@ service.interceptors.response.use(
                     type: 'warning',
                     center: true
                 }).then(() => {
-                    window.location.href = '#/login'
+                    window.location.href = '#/authentic'
                 })
             } else { // 其他异常直接提示
                 Message({

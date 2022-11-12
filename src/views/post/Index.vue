@@ -97,33 +97,56 @@
           </el-tab-pane>
         </el-tabs>
       </div>
+      <!--分页-->
+      <Pagination
+          v-show="page.total > 0"
+          :total="page.total"
+          :page.sync="page.current"
+          :limit.sync="page.size"
+          @pagination="init"
+      />
     </el-card>
   </div>
 </template>
 
 <script>
 import { getList } from '@/api/post'
+import Pagination from '@/components/Pagination'
 
 export default {
   name: 'IndexView',
+  components: {
+    Pagination
+  },
   data () {
     return {
       activeName: 'latest',
-      articleList: []
+      articleList: [],
+      page: {
+        current: 1,
+        size: 10,
+        total: 0,
+        tab_name: 'latest'
+      }
     }
   },
   created() {
-    this.init(this.tab)
+    this.init()
   },
   methods: {
-    init(tab) {
-      getList(1, 10, tab).then((response) => {
+    init() {
+      getList(this.page.current, this.page.size, this.page.tab_name).then((response) => {
         const { data } = response
+        this.page.current = data.current
+        this.page.total = data.total
+        this.page.size = data.size
         this.articleList = data.records
       })
     },
-    handleClick(tab) {
-      this.init(tab.name)
+    handleClick() {
+      this.page.tab_name = this.activeName
+      this.page.current=1
+      this.init()
     }
   },
 }
