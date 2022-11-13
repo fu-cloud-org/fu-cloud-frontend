@@ -6,10 +6,11 @@
         width: 100%;
         background-color: lightgray;
         box-shadow: 0 1px 0 0;
-        border-radius: 12px;
         text-align: center;
         line-height: 40px;
         color: #167df0;
+        display: block;
+        border-radius: 50%;
       }"
     >
       <i class="el-icon-arrow-up"></i>

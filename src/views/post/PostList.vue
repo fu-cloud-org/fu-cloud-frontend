@@ -7,48 +7,63 @@
             <article v-for="(item, index) in articleList" :key="index" class="media">
               <div style="width: 100%; height: 100%; position: relative;">
                 <!--                <div class="media-left"/>-->
+                <div style="position: absolute; left: 0; bottom: 0; font-size: 15px">
+                  <span class="is-hidden-mobile">
+                    <i class="el-icon-view"/> {{ item.view }}
+                  </span>
+                  <span class="is-hidden-mobile" style="margin-left: 15px">
+                    <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                      <i class="el-icon-chat-dot-square"/> {{ item.comments === 0 ? '评论' : item.comments }}
+                    </router-link>
+                  </span>
+                  <span class="is-hidden-mobile" style="margin-left: 15px">
+                    <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                      <i class="el-icon-collection-tag"/> {{ item.collects === 0 ? '' : item.collects }}
+                    </router-link>
+                  </span>
+                  <span
+                      v-for="(tag, index) in item.tags"
+                      :key="index"
+                      class="tag is-hidden-mobile is-success is-light mr-1"
+                      style="margin-left: 15px"
+                  >
+                      <router-link :to="{ name: 'tag', params: { name: tag.name } }">
+                        {{ "#" + tag.name }}
+                      </router-link>
+                  </span>
+                </div>
+
                 <div class="media-content" style="float: left">
-                  <div class="">
-                    <p class="ellipsis is-ellipsis-1">
-                      <el-tooltip class="item" effect="dark" :content="item.title" placement="top">
-                        <router-link :to="{name:'post-detail',params:{id:item.id}}">
-                          <span class="is-size-4">{{ item.title }}</span>
-                        </router-link>
-                      </el-tooltip>
-                    </p>
-                  </div>
-                  <div class="has-text-grey">{{ item.summary }}</div>
-                  <div style="position: absolute; right:0; bottom: 0">
+                  <div>
                     <nav class="level has-text-grey is-mobile  is-size-6">
                       <div class="level-left">
                         <div class="level-left">
                           <router-link class="level-item" :to="{ path: `/member/${item.username}/home` }">
                             <div class="user-avatar">
                               <img :src="attachImg(item.avatar)"/>
-                            </div>
+                            </div> &nbsp;
                             {{ item.alias }}
                           </router-link>
-
-                          <span class="mr-1">
-                        <i class="el-icon-date"/>{{ dayjs(item.createTime).format("YYYY/MM/DD") }}&nbsp;
-                        </span>
-
-                          <span class="is-hidden-mobile">
-                          <i class="el-icon-view"/> {{ item.view }}
-                        </span>
+                          <div class="is-size-7">
+                            <span class="mr-1">
+                              <i class="el-icon-date"/>{{ dayjs(item.createTime).format("YYYY/MM/DD") }}&nbsp;
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </nav>
+                        </div>
+                      </nav>
+                    </div>
+                  <div style="margin-top: 10px; margin-bottom: 10px">
+                    <p class="ellipsis is-ellipsis-1">
+                      <router-link :to="{name:'post-detail',params:{id:item.id}}">
+<!--                          &emsp;&emsp;&nbsp;-->
+                        <span class="is-size-5" style="font-weight: bold">{{ item.title }}</span>
+                      </router-link>
+                    </p>
                   </div>
-                  <div style="position: absolute; left: 0; bottom: 0">
-                    <span
-                        v-for="(tag, index) in item.tags"
-                        :key="index"
-                        class="tag is-hidden-mobile is-success is-light mr-1"
-                    >
-                        <router-link :to="{ name: 'tag', params: { name: tag.name } }">
-                          {{ "#" + tag.name }}
-                        </router-link>
+                  <div class="has-text-grey">
+                    <span class="is-size-6">
+                      {{ item.summary }}
                     </span>
                   </div>
                 </div>
@@ -65,48 +80,63 @@
             <article v-for="(item, index) in articleList" :key="index" class="media">
               <div style="width: 100%; height: 100%; position: relative;">
                 <!--                <div class="media-left"/>-->
+                <div style="position: absolute; left: 0; bottom: 0; font-size: 15px">
+                  <span class="is-hidden-mobile">
+                    <i class="el-icon-view"/> {{ item.view }}
+                  </span>
+                  <span class="is-hidden-mobile" style="margin-left: 15px">
+                    <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                      <i class="el-icon-chat-dot-square"/> {{ item.comments === 0 ? '评论' : item.comments }}
+                    </router-link>
+                  </span>
+                  <span class="is-hidden-mobile" style="margin-left: 15px">
+                    <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                      <i class="el-icon-collection-tag"/> {{ item.collects === 0 ? '' : item.collects }}
+                    </router-link>
+                  </span>
+                  <span
+                      v-for="(tag, index) in item.tags"
+                      :key="index"
+                      class="tag is-hidden-mobile is-success is-light mr-1"
+                      style="margin-left: 15px"
+                  >
+                      <router-link :to="{ name: 'tag', params: { name: tag.name } }">
+                        {{ "#" + tag.name }}
+                      </router-link>
+                  </span>
+                </div>
+
                 <div class="media-content" style="float: left">
-                  <div class="">
-                    <p class="ellipsis is-ellipsis-1">
-                      <el-tooltip class="item" effect="dark" :content="item.title" placement="top">
-                        <router-link :to="{name:'post-detail',params:{id:item.id}}">
-                          <span class="is-size-4">{{ item.title }}</span>
-                        </router-link>
-                      </el-tooltip>
-                    </p>
-                  </div>
-                  <div class="has-text-grey">{{ item.summary }}</div>
-                  <div style="position: absolute; right:0; bottom: 0">
+                  <div>
                     <nav class="level has-text-grey is-mobile  is-size-6">
                       <div class="level-left">
                         <div class="level-left">
                           <router-link class="level-item" :to="{ path: `/member/${item.username}/home` }">
                             <div class="user-avatar">
                               <img :src="attachImg(item.avatar)"/>
-                            </div>
+                            </div> &nbsp;
                             {{ item.alias }}
                           </router-link>
-
-                          <span class="mr-1">
-                        <i class="el-icon-date"/>{{ dayjs(item.createTime).format("YYYY/MM/DD") }}&nbsp;
-                        </span>
-
-                          <span class="is-hidden-mobile">
-                          <i class="el-icon-view"/> {{ item.view }}
-                        </span>
+                          <div class="is-size-7">
+                            <span class="mr-1">
+                              <i class="el-icon-date"/>{{ dayjs(item.createTime).format("YYYY/MM/DD") }}&nbsp;
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </nav>
                   </div>
-                  <div style="position: absolute; left: 0; bottom: 0">
-                    <span
-                        v-for="(tag, index) in item.tags"
-                        :key="index"
-                        class="tag is-hidden-mobile is-success is-light mr-1"
-                    >
-                        <router-link :to="{ name: 'tag', params: { name: tag.name } }">
-                          {{ "#" + tag.name }}
-                        </router-link>
+                  <div style="margin-top: 10px; margin-bottom: 10px">
+                    <p class="ellipsis is-ellipsis-1">
+                      <router-link :to="{name:'post-detail',params:{id:item.id}}">
+                        <!--                          &emsp;&emsp;&nbsp;-->
+                        <span class="is-size-5" style="font-weight: bold">{{ item.title }}</span>
+                      </router-link>
+                    </p>
+                  </div>
+                  <div class="has-text-grey">
+                    <span class="is-size-6">
+                      {{ item.summary }}
                     </span>
                   </div>
                 </div>

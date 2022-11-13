@@ -1,8 +1,9 @@
 <template>
+  <div>
+    <div class="mb-5" style="width: 100%; position: absolute">
+      <Header/>
+    </div>
     <div class="loginRe" id="loginRe">
-      <div class="mb-5">
-        <Header/>
-      </div>
       <div class="form-container sign-up-container">
         <el-form
             size="medium"
@@ -45,11 +46,11 @@
           <el-form-item label="邮箱" prop="email">
             <el-input v-model="upRuleForm.email" autocomplete="on" style="width: 220px"/>
           </el-form-item>
-            <el-button
-                type="primary"
-                @click="submitUpForm('upRuleForm')"
-            >注册</el-button>
-<!--            <el-button @click="resetForm('ruleForm')">重置</el-button>-->
+          <el-button
+              type="primary"
+              @click="submitUpForm('upRuleForm')"
+          >注册</el-button>
+          <!--            <el-button @click="resetForm('ruleForm')">重置</el-button>-->
         </el-form>
       </div>
 
@@ -104,6 +105,9 @@
         </div>
       </div>
     </div>
+  </div>
+
+
 </template>
 
 <script>

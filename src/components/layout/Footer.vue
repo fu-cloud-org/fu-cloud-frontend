@@ -1,4 +1,3 @@
-
 <template>
   <footer class="footer has-text-grey-light has-background-grey-darker">
     <div class="container">
@@ -32,7 +31,7 @@
 </template>
 
 <script>
-import BackTop from "@/components/layout/BackTop";
+import BackTop from "@/components/BackTop";
 export default {
   name: "Footer",
   components: {
