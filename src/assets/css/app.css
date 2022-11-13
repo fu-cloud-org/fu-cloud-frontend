@@ -148,3 +148,61 @@ a:hover {
 .is-ellipsis-3 {
     -webkit-line-clamp: 3;
 }
+
+body,
+html{
+    cursor: url(../cursor/normal.cur),
+    default;
+}
+/* 悬停图片时的鼠标指针 */
+img, .el-carousel__mask, .el-carousel__indicator, .el-switch__core{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+#tab-hot, #tab-latest{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 选择链接标签时的鼠标指针 */
+a:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 选中输入框时的鼠标指针 */
+input:hover{
+    cursor: url('../cursor/texto.cur'),auto;
+}
+/* 悬停按钮时的鼠标指针 */
+button:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 悬停列表标签时的鼠标指针 */
+i:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 悬停页脚链接标签（例如页脚徽标）时的鼠标指针 */
+#footer-wrap a:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 悬停页码时的鼠标指针 */
+#pagination .page-number:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+/* 悬停菜单栏时的鼠标指针 */
+#nav .site-page:hover{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+
+.categoryBar-list-item{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+
+.jg-caption {
+    text-align: center !important;
+}
