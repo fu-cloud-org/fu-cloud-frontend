@@ -54,31 +54,34 @@
             </b-button>
           </div>
         </b-navbar-item>
+<!--        <div class="user-avatar">-->
+<!--          <img :src="attachImg(user.avatar)"/>-->
+<!--        </div>-->
+            <b-navbar-dropdown
+                v-else
+                :label="user.alias"
+            >
+              <b-navbar-item
+                  tag="router-link"
+                  :to="{ path: `/member/${user.username}/home` }"
+              >
+                <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心
+              </b-navbar-item>
+              <hr class="dropdown-divider">
+              <b-navbar-item
+                  tag="router-link"
+                  :to="{ path: `/member/${user.username}/setting` }"
+              >
+                <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
+              </b-navbar-item>
+              <hr class="dropdown-divider">
+              <b-navbar-item
+                  tag="a"
+                  @click="logout"
+              > <i class="el-icon-warning" style="font-size: 20px"/>&nbsp; 退出登录
+              </b-navbar-item>
+            </b-navbar-dropdown>
 
-        <b-navbar-dropdown
-            v-else
-            :label="user.alias"
-        >
-          <b-navbar-item
-              tag="router-link"
-              :to="{ path: `/member/${user.username}/home` }"
-          >
-            <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心
-          </b-navbar-item>
-          <hr class="dropdown-divider">
-          <b-navbar-item
-              tag="router-link"
-              :to="{ path: `/member/${user.username}/setting` }"
-          >
-            <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
-          </b-navbar-item>
-          <hr class="dropdown-divider">
-          <b-navbar-item
-              tag="a"
-              @click="logout"
-          > <i class="el-icon-warning" style="font-size: 20px"/>&nbsp; 退出登录
-          </b-navbar-item>
-        </b-navbar-dropdown>
       </template>
     </b-navbar>
   </header>
@@ -88,10 +91,12 @@
 import { disable as disableDarkMode, enable as enableDarkMode } from 'darkreader'
 import { getDarkMode, setDarkMode } from '@/utils/auth'
 import { mapGetters } from 'vuex'
+import {attachImg} from "@/utils/attachImg";
 export default {
   name: 'Header',
   data() {
     return {
+      attachImg: attachImg,
       logoUrl: require('@/assets/fu-cloud-icon.png'),
       fu_cloud_icon: require('@/assets/fu-cloud-icon.png'),
       searchKey: '',
@@ -159,5 +164,11 @@ input {
 ::v-deep .el-input__inner {
   border-radius: 23px;
   height: 45px;
+}
+.user-avatar img{
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
 }
 </style>

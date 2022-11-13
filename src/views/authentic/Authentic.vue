@@ -1,5 +1,8 @@
 <template>
     <div class="loginRe" id="loginRe">
+      <div class="mb-5">
+        <Header/>
+      </div>
       <div class="form-container sign-up-container">
         <el-form
             size="medium"
@@ -105,8 +108,10 @@
 
 <script>
 import { register } from '@/api/auth'
+import Header from "@/components/layout/Header";
 export default {
   name: "Authentic",
+  components: {Header},
   mounted() {
     let signUpButton = document.getElementById('signUp');
     let signInButton = document.getElementById('signIn');
@@ -436,7 +441,7 @@ button.ghost {
 }
 
 .overlay {
-  background: url("../../assets/img/fu-cloud-org.jpg") center;
+  background: url("../../assets/img/fu-cloud-org.png") center;
   background-size: cover;
   /*background: lightskyblue;*/
   /*background: linear-gradient(to right, pink, pink) no-repeat 0 0 / cover;*/

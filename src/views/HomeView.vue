@@ -3,7 +3,7 @@
     <div class="box"> <i class="el-icon-bell" style="font-size: 20px"/>&nbsp; {{billboard.content}} </div>
     <div class="columns">
       <div class="column is-three-quarters">
-        <index-view/>
+        <post-list/>
       </div>
       <div class="column">
         <card-bar/>
@@ -16,12 +16,12 @@
 // @ is an alias to /src
 
 import {getBillbooard} from "@/api/billboard";
-import IndexView from "@/views/post/Index";
+import PostList from "@/views/post/PostList";
 import CardBar from "@/views/card/CardBar";
 
 export default {
   name: 'HomeView',
-  components: { CardBar, IndexView},
+  components: { CardBar, PostList},
   data () {
     return {
       billboard: {
