@@ -8,3 +8,12 @@ export function getList(pageNo, size, tab) {
         params: { pageNo: pageNo, size: size, tab: tab }
     }))
 }
+
+export function release(post, userName) {
+    return request({
+        url: '/post/release',
+        method: 'post',
+        data: post,
+        params: { userName: userName }
+    })
+}

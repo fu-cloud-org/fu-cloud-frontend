@@ -17,7 +17,7 @@ router.beforeEach(async (to, from, next) => {
     const hasToken = getToken();
 
     if (hasToken) {
-        if (to.path === '/login') {
+        if (to.path === '/authentic') {
             // 登录，跳转首页
             next({path: '/'})
             NProgress.done()
@@ -31,7 +31,7 @@ router.beforeEach(async (to, from, next) => {
         next()
     }
     else {
-        next('/login')
+        next('/authentic')
     }
 })
 

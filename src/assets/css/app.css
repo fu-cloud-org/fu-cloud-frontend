@@ -155,7 +155,7 @@ html{
     default;
 }
 /* 悬停图片时的鼠标指针 */
-img, .el-carousel__mask, .el-carousel__indicator, .el-switch__core{
+img, .el-carousel__mask, .el-carousel__indicator, .el-switch__core, .vditor-tooltipped{
     cursor: url(../cursor/pointer.cur),
     default;
 }
@@ -169,7 +169,7 @@ a:hover{
     default;
 }
 /* 选中输入框时的鼠标指针 */
-input:hover{
+input:hover, .el-textarea__inner{
     cursor: url('../cursor/texto.cur'),auto;
 }
 /* 悬停按钮时的鼠标指针 */
@@ -205,4 +205,19 @@ i:hover{
 
 .jg-caption {
     text-align: center !important;
+}
+
+::-webkit-scrollbar-thumb {
+    /* background-color: #2ab1ff; */
+    background-color: #FFB6C1;
+    background-image: -webkit-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.4) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(255, 255, 255, 0.4) 75%,
+        transparent 75%,
+        transparent
+    );
 }

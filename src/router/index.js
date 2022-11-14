@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import View404 from "@/views/404/View404";
 import Authentic from "@/views/authentic/Authentic";
 import MainContainer from "@/views/MainContainer";
+import Release from "@/views/post/Release";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,15 @@ const routes = [
     meta: {
       title : '欢迎加入福云',
       keepAlive: true
+    }
+  },
+  {
+    path: '/post/release',
+    name: 'PostRelease',
+    component: Release,
+    meta: {
+        title : '分享新鲜事',
+        keepAlive: true
     }
   },
   {
