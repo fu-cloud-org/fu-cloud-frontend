@@ -77,7 +77,41 @@
             <b>封面（可选）：</b>
             <div style="margin: 15px 0;"/>
             <div>
-              明天再说，睡觉重要，瓦安zxt
+              <el-upload
+                  ref="upload"
+                  :action="upload()"
+                  list-type="picture-card"
+                  :on-change="handleChange"
+                  :on-success="handleSuccess"
+                  :on-remove="handleRemove"
+                  :before-upload="beforeCoverUpload"
+                  :class="{hide:hideUpload}"
+                  :auto-upload="true">
+                <i slot="default" class="el-icon-plus"></i>
+                <div slot="file" slot-scope="{file}">
+                  <img
+                      class="el-upload-list__item-thumbnail"
+                      :src="file.url" alt=""
+                  >
+                  <span class="el-upload-list__item-actions">
+                    <span
+                      class="el-upload-list__item-preview"
+                      @click="handlePictureCardPreview(file)">
+                      <i class="el-icon-zoom-in"></i>
+                    </span>
+                    <span
+                        v-if="!disabled"
+                        class="el-upload-list__item-delete"
+                        @click="handleRemove(file)"
+                    >
+                      <i class="el-icon-delete"></i>
+                    </span>
+                  </span>
+                </div>
+              </el-upload>
+              <el-dialog :visible.sync="dialogVisible">
+                <img width="100%" :src="dialogImageUrl" alt="">
+              </el-dialog>
             </div>
 
           </el-card>
@@ -90,25 +124,34 @@
 </template>
 
 <script>
-import { release } from '@/api/post'
+import {postManager, release, uploadCover} from '@/api/post'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import Header from "@/components/layout/Header";
 import CardBar from "@/views/card/CardBar";
 import {mapGetters} from "vuex";
 import Footer from "@/components/layout/Footer";
+import {ref} from "vue";
 export default {
   name: 'TopicPost',
   components: {Footer, CardBar, Header},
   data() {
     return {
+      base_url: process.env.VUE_APP_SERVER_URL,
+      uploadTypes: ref(["jpg", "jpeg", "png", "gif"]),
+      dialogImageUrl: '',
+      dialogVisible: false,
+      disabled: false,
+      hideUpload: false,
+      limitCount:1,
       userName: '',
       contentEditor: {},
       ruleForm: {
         title: '',
         tags: [],
         content: '',
-        summary: ''
+        summary: '',
+        cover: ''
       },
       rules: {
         title: [
@@ -196,16 +239,52 @@ export default {
     },
     goBack() {
       this.$router.back()
+    },
+  //  upload
+    handleChange(file, fileList) {
+      this.hideUpload = fileList.length >= this.limitCount;
+    },
+    handleRemove() {
+      this.ruleForm.cover = '';
+      this.$refs.upload.clearFiles();
+      this.hideUpload = false;
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    handleSuccess(res) {
+      this.ruleForm.cover = res.data;
+    },
+    beforeCoverUpload(file) {
+      const isLegal = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isLegal) {
+        this.$message.error('请选择正确的图片格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!');
+      }
+      return isLegal && isLt2M;
+    },
+    upload() {
+      console.log(this.userName);
+      return postManager.uploadCover(this.userName);
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 #footer {
   position: relative;
   bottom: 0;
   width: 100%;
   height: 2.0rem;
+}
+
+.hide .el-upload--picture-card {
+  display: none;
 }
 </style>

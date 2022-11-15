@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request, {getBaseURL} from '@/utils/request'
 
 // 列表
 export function getList(pageNo, size, tab) {
@@ -17,3 +17,9 @@ export function release(post, userName) {
         params: { userName: userName }
     })
 }
+
+const postManager = {
+    uploadCover: (userName) => `${getBaseURL()}/post/uploadCover?userName=${userName}`,
+}
+
+export { postManager }
