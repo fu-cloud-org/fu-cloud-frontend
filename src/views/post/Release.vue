@@ -150,8 +150,8 @@ export default {
         title: '',
         tags: [],
         content: '',
-        summary: '',
-        cover: ''
+        summary: '不写简介的帖子可不是一篇好帖子欧',
+        cover: '/img/cover/fu-cloud-org.png'
       },
       rules: {
         title: [

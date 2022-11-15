@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
 
 .swiper-container{
-  width: 60%;
+  width: 80%;
   margin: auto;
   padding-top: 40px;
   img {

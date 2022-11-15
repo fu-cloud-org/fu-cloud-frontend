@@ -1,5 +1,5 @@
 <template>
-  <el-backtop :bottom="60" :right="200">
+  <el-backtop :bottom="60" :right="100">
     <div title="回到顶部"
          style="{
         height: 100%;
