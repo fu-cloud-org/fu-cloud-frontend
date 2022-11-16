@@ -5,6 +5,7 @@ import View404 from "@/views/404/View404";
 import Authentic from "@/views/authentic/Authentic";
 import MainContainer from "@/views/MainContainer";
 import Release from "@/views/post/Release";
+import PostDetail from "@/views/post/PostDetail";
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,15 @@ const routes = [
     component: Release,
     meta: {
         title : '分享新鲜事',
+        keepAlive: true
+    }
+  },
+  {
+    path: '/path/:id',
+    name: 'post-detail',
+    component: PostDetail,
+    meta: {
+        title : '是不是迷路了你',
         keepAlive: true
     }
   },

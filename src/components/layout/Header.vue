@@ -54,33 +54,40 @@
             </b-button>
           </div>
         </b-navbar-item>
-<!--        <div class="user-avatar">-->
-<!--          <img :src="attachImg(user.avatar)"/>-->
-<!--        </div>-->
-            <b-navbar-dropdown
-                v-else
-                :label="user.alias"
-            >
-              <b-navbar-item
-                  tag="router-link"
-                  :to="{ path: `/member/${user.username}/home` }"
-              >
-                <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心
-              </b-navbar-item>
-              <hr class="dropdown-divider">
-              <b-navbar-item
-                  tag="router-link"
-                  :to="{ path: `/member/${user.username}/setting` }"
-              >
-                <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
-              </b-navbar-item>
-              <hr class="dropdown-divider">
-              <b-navbar-item
-                  tag="a"
-                  @click="logout"
-              > <i class="el-icon-warning" style="font-size: 20px"/>&nbsp; 退出登录
-              </b-navbar-item>
-            </b-navbar-dropdown>
+        <b-navbar-dropdown
+            v-else
+            :label="user.alias"
+        >
+          <b-navbar-item
+              tag="router-link"
+              :to="{ path: `/member/${user.username}/home` }"
+          >
+<!--            <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心-->
+            <div class="user-avatar">
+              <img :src="attachImg(user.avatar)"/>
+            </div> &nbsp; 个人中心
+          </b-navbar-item>
+          <hr class="dropdown-divider">
+          <b-navbar-item
+              tag="router-link"
+              :to="{ path: `/member/${user.username}/setting` }"
+          >
+            <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
+          </b-navbar-item>
+          <hr class="dropdown-divider">
+          <b-navbar-item
+              tag="a"
+              @click="logout"
+          > <i class="el-icon-warning" style="font-size: 20px"/>&nbsp; 退出登录
+          </b-navbar-item>
+        </b-navbar-dropdown>
+        <b-navbar-item>
+          <div class="fullScreen-btn" @click="handleFullScreen">
+            <el-tooltip :content="fullscreen?`退出全屏`:`全屏`" placement="bottom">
+              <i class="el-icon-full-screen"/>
+            </el-tooltip>
+          </div>
+        </b-navbar-item>
 
       </template>
     </b-navbar>
@@ -96,6 +103,7 @@ export default {
   name: 'Header',
   data() {
     return {
+      fullScreen: false,
       attachImg: attachImg,
       logoUrl: require('@/assets/fu-cloud-icon.png'),
       fu_cloud_icon: require('@/assets/fu-cloud-icon.png'),
@@ -105,6 +113,27 @@ export default {
   },
   computed: {
     ...mapGetters(['token', 'user'])
+  },
+  mounted() {
+    window.addEventListener('keydown', function(event) {
+      //禁掉F11的全屏的默认事件,不会禁止F11的退出全屏
+      const e = event || window.event
+      if (e && e.keyCode === 122) {
+        e.preventDefault()
+      }
+    })
+    document.addEventListener('fullscreenchange', () => {
+      this.fullscreen = !this.fullscreen;
+    })
+    document.addEventListener('mozfullscreenchange', () => {
+      this.fullscreen = !this.fullscreen
+    })
+    document.addEventListener('webkitfullscreenchange', () => {
+      this.fullscreen = !this.fullscreen
+    })
+    document.addEventListener('msfullscreenchange', () => {
+      this.fullscreen = !this.fullscreen
+    })
   },
   watch: {
     // 监听Theme模式
@@ -127,6 +156,31 @@ export default {
     }
   },
   methods: {
+    handleFullScreen(){
+      if (this.fullscreen){
+        if (document.exitFullscreen){
+          document.exitFullscreen();
+        } else if (document.webkitCancelFullScreen) { // safari, chrome
+          document.webkitCancelFullScreen();
+        } else if (document.mozCancelFullScreen) { // firefox
+          document.mozCancelFullScreen();
+        } else if (document.msExitFullScreen) { // IE
+          document.msExitFullScreen();
+        }
+      } else {
+        let element = document.documentElement;
+        if (element.requestFullscreen) {
+          element.requestFullscreen()
+        } else if (element.webkitRequestFullScreen) { // safari, chrome
+          element.webkitRequestFullScreen()
+        } else if (element.mozRequestFullScreen) { // firefox
+          element.mozRequestFullScreen()
+        } else if (element.msRequestFullScreen) { // IE
+          element.msRequestFullScreen()
+        }
+      }
+      // this.fullscreen = !this.fullscreen;
+    },
     async logout() {
       this.$store.dispatch('user/logout').then(() => {
         this.$message.info('退出登录成功')
@@ -165,10 +219,11 @@ input {
   border-radius: 23px;
   height: 45px;
 }
-.user-avatar img{
+
+.user-avatar {
   display: block;
   width: 20px;
   height: 20px;
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 </style>
