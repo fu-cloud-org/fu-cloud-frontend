@@ -1,20 +1,20 @@
 export const swiperList = [
     {
-        picImg: require("@/assets/img/swiper/01.png"),
+        picImg: require("@/assets/img/swiper/001.jpg"),
     },
     {
-        picImg: require("@/assets/img/swiper/02.png"),
+        picImg: require("@/assets/img/swiper/002.jpg"),
     },
     {
-        picImg: require("@/assets/img/swiper/03.png"),
+        picImg: require("@/assets/img/swiper/003.jpg"),
     },
     {
-        picImg: require("@/assets/img/swiper/04.png"),
+        picImg: require("@/assets/img/swiper/004.jpg"),
     },
     {
-        picImg: require("@/assets/img/swiper/05.jpg"),
+        picImg: require("@/assets/img/swiper/005.jpg"),
     },
     {
-        picImg: require("@/assets/img/swiper/06.jpg"),
+        picImg: require("@/assets/img/swiper/006.jpg"),
     },
 ]
