@@ -18,6 +18,16 @@ export function release(post, userName) {
     })
 }
 
+export function getPostDetail(id) {
+    return request({
+        url: `/post`,
+        method: 'get',
+        params: {
+            id: id
+        }
+    })
+}
+
 const postManager = {
     uploadCover: (userName) => `${getBaseURL()}/post/uploadCover?userName=${userName}`,
 }
