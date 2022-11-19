@@ -17,7 +17,6 @@ import WelcomeLogin from "@/views/card/WelcomeLogin";
 import Self from "@/views/card/Self";
 import {mapGetters} from "vuex";
 import {getUserProfile} from "@/api/auth";
-import user from "@/store/modules/user";
 export default {
   name: "cardBar",
   components: {Self, WelcomeLogin, Promotion, Tip},
@@ -34,8 +33,10 @@ export default {
       'token','user'
     ])
   },
-  created() {
-    this.init()
+  mounted() {
+    if(this.token !== '' && this.token != null){
+      this.init();
+    }
   },
   methods: {
     async init() {

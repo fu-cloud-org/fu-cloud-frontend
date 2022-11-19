@@ -179,7 +179,7 @@ export default {
       articleList: [],
       page: {
         current: 1,
-        size: 5,
+        size: 10,
         total: 0,
         tab_name: 'latest'
       }
