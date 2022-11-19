@@ -28,6 +28,16 @@ export function getPostDetail(id) {
     })
 }
 
+export function getRecommendPosts(id) {
+    return request({
+        url: '/post/recommend',
+        method: 'get',
+        params: {
+            postId: id
+        }
+    })
+}
+
 const postManager = {
     uploadCover: (userName) => `${getBaseURL()}/post/uploadCover?userName=${userName}`,
 }

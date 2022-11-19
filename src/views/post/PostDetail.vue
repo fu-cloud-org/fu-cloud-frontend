@@ -73,6 +73,10 @@
               :user="postUser"
               :post-user="user"
           />
+          <recommend
+              v-if="flag"
+              :post-id="post.id"
+          />
         </div>
       </div>
     </div>
@@ -87,9 +91,10 @@ import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import Author from "@/views/card/Author";
 import Header from "@/components/layout/Header";
+import Recommend from "@/views/card/Recommend";
 export default {
   name: 'postDetail',
-  components: {Header, Author},
+  components: {Recommend, Header, Author},
   computed: {
     ...mapGetters([
       'token','user'
@@ -126,6 +131,7 @@ export default {
         // this.comments = data.comments
         this.renderMarkdown(this.post.content)
         this.flag = true
+        // history.go(0)
       })
     },
     handleDelete(id) {
@@ -139,7 +145,12 @@ export default {
         }
       })
     }
-  }
+  },
+  watch: {
+    $route(to, from) {
+      this.fetchPost()
+    }
+  },
 }
 </script>
 
