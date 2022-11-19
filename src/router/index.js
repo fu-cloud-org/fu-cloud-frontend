@@ -44,10 +44,6 @@ const routes = [
     path: '/path/:id',
     name: 'post-detail',
     component: PostDetail,
-    meta: {
-        title : '是不是迷路了你',
-        keepAlive: true
-    }
   },
   {
     path: '/404',

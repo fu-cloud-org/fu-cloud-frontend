@@ -30,3 +30,11 @@ export function logout() {
         // method: "post"
     })
 }
+
+export function getUserProfile(userId) {
+    return request(({
+        url: `/user/profile`,
+        method: "get",
+        params: {userId}
+    }))
+}
