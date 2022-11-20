@@ -73,6 +73,7 @@
 
           <el-form-item label="密码" prop="pass">
             <el-input
+                show-password="true"
                 style="width: 220px"
                 type="password"
                 v-model="ruleForm.pass"
