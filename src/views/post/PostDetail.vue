@@ -18,15 +18,15 @@
               <p class="is-size-4 has-text-weight-bold">{{ post.title }}</p>
               <div class="has-text-grey is-size-7 mt-3">
                 <span>{{ dayjs(post.createTime).format('YYYY/MM/DD') }}</span>
-                <el-divider direction="vertical" />
+                <el-divider direction="vertical"/>
                 <span>发布者：{{ postUser.alias }}</span>
-                <el-divider direction="vertical" />
+                <el-divider direction="vertical"/>
                 <span>浏览量：{{ post.view }}</span>
               </div>
             </div>
 
             <!--Markdown-->
-            <div id="preview" />
+            <div id="preview"/>
 
             <!--tabs-->
             <nav class="level has-text-grey is-size-7 mt-6">
@@ -65,6 +65,8 @@
             </nav>
           </el-card>
 
+          <comments :slug="post.id" style="margin-bottom: 80px"/>
+
         </div>
 
         <div class="column">
@@ -86,20 +88,22 @@
 </template>
 
 <script>
-import {deletepPost, getPostDetail } from '@/api/post'
-import { mapGetters } from 'vuex'
+import {deletepPost, getPostDetail} from '@/api/post'
+import {mapGetters} from 'vuex'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import Author from "@/views/card/Author";
 import Header from "@/components/layout/Header";
 import Recommend from "@/views/card/Recommend";
 import Footer from "@/components/layout/Footer";
+import Comments from "@/components/Comment/Comments";
+
 export default {
   name: 'postDetail',
-  components: {Footer, Recommend, Header, Author},
+  components: {Comments, Footer, Recommend, Header, Author},
   computed: {
     ...mapGetters([
-      'token','user'
+      'token', 'user'
     ])
   },
   data() {
@@ -119,13 +123,13 @@ export default {
   methods: {
     renderMarkdown(md) {
       Vditor.preview(document.getElementById('preview'), md, {
-        hljs: { style: 'github' }
+        hljs: {style: 'github'}
       })
     },
 
     async fetchPost() {
       getPostDetail(this.$route.params.id).then(response => {
-        const { data } = response
+        const {data} = response
         document.title = data.post.title
         this.post = data.post
         this.tags = data.tags
@@ -138,11 +142,11 @@ export default {
     },
     handleDelete(id) {
       deletePost(id).then(value => {
-        const { code, message } = value
+        const {code, message} = value
         alert(message)
         if (code === 200) {
           setTimeout(() => {
-            this.$router.push({ path: '/' })
+            this.$router.push({path: '/'})
           }, 500)
         }
       })
@@ -160,6 +164,7 @@ export default {
 #preview {
   min-height: 300px;
 }
+
 #footer {
   position: relative;
   bottom: 0;
