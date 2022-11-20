@@ -80,6 +80,7 @@
         </div>
       </div>
     </div>
+    <Footer id="footer"/>
   </div>
 
 </template>
@@ -92,9 +93,10 @@ import 'vditor/dist/index.css'
 import Author from "@/views/card/Author";
 import Header from "@/components/layout/Header";
 import Recommend from "@/views/card/Recommend";
+import Footer from "@/components/layout/Footer";
 export default {
   name: 'postDetail',
-  components: {Recommend, Header, Author},
+  components: {Footer, Recommend, Header, Author},
   computed: {
     ...mapGetters([
       'token','user'
@@ -157,5 +159,11 @@ export default {
 <style>
 #preview {
   min-height: 300px;
+}
+#footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 2.0rem;
 }
 </style>

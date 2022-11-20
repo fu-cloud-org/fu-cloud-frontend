@@ -9,6 +9,21 @@
         <card-bar/>
       </div>
     </div>
+    <el-button
+        v-if="token != null && token !== ''"
+        type="primary"
+        icon="el-icon-edit"
+        circle class="release-btn"
+        @click="goRelease"
+    />
+      <el-button
+          v-else
+          type="primary"
+          icon="el-icon-edit"
+          circle class="release-btn"
+          @click="goRelease"
+          disabled
+      />
   </div>
 </template>
 
@@ -18,10 +33,16 @@
 import {getBillbooard} from "@/api/billboard";
 import PostList from "@/views/post/PostList";
 import CardBar from "@/views/card/CardBar";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'HomeView',
   components: { CardBar, PostList},
+  computed: {
+    ...mapGetters([
+        'token'
+    ])
+  },
   data () {
     return {
       billboard: {
@@ -38,7 +59,24 @@ export default {
         const {data} = value;
         this.billboard = data;
       })
+    },
+    goRelease() {
+      this.$router.push('/post/release')
     }
   },
+  watch: {
+    token: function (newVal, oldVal) {
+        history.go(0);
+    }
+  }
 }
 </script>
+
+<style scoped>
+.release-btn {
+  position: fixed;
+  bottom: 120px;
+  right: 100px;
+  z-index: 1000;
+}
+</style>

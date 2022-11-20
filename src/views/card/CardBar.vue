@@ -33,7 +33,7 @@ export default {
       'token','user'
     ])
   },
-  mounted() {
+  created() {
     if(this.token !== '' && this.token != null){
       this.init();
     }
@@ -45,6 +45,13 @@ export default {
         this.self = data
       })
     },
+  },
+  watch: {
+    token: function (newVal, oldVal) {
+      if(newVal !== '' && newVal != null){
+        this.init();
+      }
+    }
   }
 }
 </script>
