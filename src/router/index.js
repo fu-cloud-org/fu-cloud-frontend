@@ -6,6 +6,7 @@ import Authentic from "@/views/authentic/Authentic";
 import MainContainer from "@/views/MainContainer";
 import Release from "@/views/post/Release";
 import PostDetail from "@/views/post/PostDetail";
+import Edit from "@/views/post/Edit";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,14 @@ const routes = [
     path: '/path/:id',
     name: 'post-detail',
     component: PostDetail,
+  },
+  {
+    name: 'post-edit',
+    path: '/post/edit/:id',
+    component: Edit,
+    meta: {
+      title: '编辑'
+    }
   },
   {
     path: '/404',
