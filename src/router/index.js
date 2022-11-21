@@ -8,6 +8,7 @@ import Release from "@/views/post/Release";
 import PostDetail from "@/views/post/PostDetail";
 import Edit from "@/views/post/Edit";
 import Tag from "@/views/tag/Tag";
+import Search from "@/views/Search";
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,12 @@ const routes = [
       title : '欢迎加入福云',
       keepAlive: true
     }
+  },
+  {
+    name: 'search',
+    path: '/search',
+    component: Search,
+    meta: { title: '搜索' }
   },
   {
     path: '/post/release',
