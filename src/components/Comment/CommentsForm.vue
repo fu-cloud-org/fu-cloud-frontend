@@ -48,6 +48,12 @@ export default {
     async onSubmit() {
       this.isLoading = true
       try {
+        if (this.commentText === '' || this.commentText == null){
+          return this.$message({
+            type: "info",
+            message: '您不考虑说些啥在发表吗？'
+          })
+        }
         let postData = {}
         console.log(this.commentText)
         postData['content'] = this.commentText
