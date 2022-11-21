@@ -36,10 +36,10 @@
                     <router-link
                         v-for="(tag, index) in tags"
                         :key="index"
-                        :to="{ name: 'tag', params: { name: tag.name } }"
+                        :to="{ name: 'tag', params: { name: tag } }"
                     >
                       <b-tag type="is-info is-light mr-1">
-                        {{ "#" + tag.name }}
+                        {{ "#" + tag }}
                       </b-tag>
                     </router-link>
                   </b-taglist>

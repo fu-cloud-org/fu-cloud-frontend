@@ -6,7 +6,7 @@
         <div class="column is-four-fifths">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
-              <span><i class="fa fa fa-book">编辑帖子</i></span>
+              <span><i class="fa fa fa-book">&nbsp;更新</i></span>
             </div>
             <div>
               <el-form :model="post" ref="post" class="demo-post">
@@ -145,7 +145,7 @@ export default {
     fetchPost() {
       getPostDetail(this.$route.params.id).then((value) => {
         this.post = value.data.post;
-        this.tags = value.data.tags.map(tag => tag.name);
+        this.tags = value.data.tags
         this.renderMarkdown(this.post.content);
       });
     },
