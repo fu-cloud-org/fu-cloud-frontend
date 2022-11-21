@@ -38,6 +38,21 @@ export function getRecommendPosts(id) {
     })
 }
 
+export function update(topic) {
+    return request({
+        url: '/post/update',
+        method: 'post',
+        data: topic
+    })
+}
+
+export function deletePost(id) {
+    return request({
+        url: `/post/delete/${id}`,
+        method: 'delete'
+    })
+}
+
 const postManager = {
     uploadCover: (userName) => `${getBaseURL()}/post/uploadCover?userName=${userName}`,
 }

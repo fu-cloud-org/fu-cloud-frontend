@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import {deletepPost, getPostDetail} from '@/api/post'
+import {deletePost, getPostDetail} from '@/api/post'
 import {mapGetters} from 'vuex'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
@@ -140,16 +140,30 @@ export default {
         // history.go(0)
       })
     },
-    handleDelete(id) {
-      deletePost(id).then(value => {
-        const {code, message} = value
-        alert(message)
-        if (code === 200) {
-          setTimeout(() => {
-            this.$router.push({path: '/'})
-          }, 500)
-        }
-      })
+    async handleDelete(id) {
+      const confirmResult = await
+          this.$confirm('此操作将会永久删除该帖子，不可恢复，是否继续执行',
+              '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: "warning"
+              }).catch(err => err)
+      if(confirmResult === 'confirm'){
+        deletePost(id).then(value => {
+          const {code, message} = value
+          this.$message.success('删除成功')
+          if (code === 200) {
+            setTimeout(() => {
+              this.$router.push({path: '/'})
+            }, 500)
+          }
+        })
+      } else {
+        return this.$message({
+          type: "info",
+          message: '您已取消删除操作'
+        })
+      }
     }
   },
   watch: {

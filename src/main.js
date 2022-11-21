@@ -11,7 +11,7 @@ import format from 'date-fns/format'
 import '@/permission'
 import relativeTime from 'dayjs/plugin/relativeTime';
 import './assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css'
-
+import {MessageBox} from "element-ui";
 import 'dayjs/locale/zh-cn'
 const dayjs = require('dayjs');
 
@@ -21,6 +21,7 @@ dayjs.locale('zh-cn') // use locale globally
 dayjs().locale('zh-cn').format() // use locale in a specific instance
 
 Vue.prototype.dayjs = dayjs;
+Vue.prototype.$confirm = MessageBox.confirm
 
 Vue.filter('date', (date) => {
   return format(new Date(date), 'yyyy-MM-dd')
