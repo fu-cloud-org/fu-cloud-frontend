@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="mb-5" style="width: 100%; position: absolute">
-      <Header/>
-    </div>
-    <div class="container" style="margin-top: 80px">
+    <Header/>
+    <div class="container" style="margin-top: 90px">
       <div class="columns">
         <!--detail-->
         <div class="column is-three-quarters">

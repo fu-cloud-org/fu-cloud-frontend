@@ -4,7 +4,7 @@
     <div class="container" style="margin-top: 90px">
       <div class="columns">
         <div class="column is-four-fifths">
-          <el-card class="box-card" shadow="never">
+          <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span><i class="fa fa fa-book">&nbsp;更新</i></span>
             </div>

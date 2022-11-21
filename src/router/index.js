@@ -7,6 +7,7 @@ import MainContainer from "@/views/MainContainer";
 import Release from "@/views/post/Release";
 import PostDetail from "@/views/post/PostDetail";
 import Edit from "@/views/post/Edit";
+import Tag from "@/views/tag/Tag";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,12 @@ const routes = [
     path: '/path/:id',
     name: 'post-detail',
     component: PostDetail,
+  },
+  {
+    name: 'tag',
+    path: '/tag/:name',
+    component: Tag,
+    meta: { title: '帖子列表' }
   },
   {
     name: 'post-edit',
