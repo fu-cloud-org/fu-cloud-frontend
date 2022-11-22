@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 100%; min-height: 100%">
     <Header/>
-    <div class="container" style="margin-top: 90px">
+    <div class="container" style="margin-top: 90px; min-height: 100%; margin-bottom: 90px">
       <el-card>
         <div slot="header" class="clearfix">
           检索到 <code>{{ list.length }}</code>
@@ -133,11 +133,9 @@ export default {
 </script>
 
 <style scoped>
-#footer {
-  position: relative;
-  bottom: 0;
+#footer{
   width: 100%;
-  height: 2.0rem;
+  height: 150px;
 }
 .user-avatar img {
   display: block;

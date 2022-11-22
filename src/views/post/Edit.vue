@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 100%; min-height: 100%">
     <Header/>
-    <div class="container" style="margin-top: 90px">
+    <div class="container" style="margin-top: 90px; margin-bottom: 90px">
       <div class="columns">
         <div class="column is-four-fifths">
           <el-card class="box-card">
@@ -207,10 +207,8 @@ export default {
 }
 
 #footer {
-  position: relative;
-  bottom: 0;
   width: 100%;
-  height: 2.0rem;
+  height: 150px;
 }
 
 .hide .el-upload--picture-card {
