@@ -1,5 +1,13 @@
 import request from "@/utils/request";
 
+export function getCode(to) {
+    return request({
+        url: "/getCode",
+        method: "get",
+        params: { to }
+    });
+}
+
 export function register(userDTO) {
     return request({
         url: "/user/register",

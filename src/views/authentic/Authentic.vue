@@ -44,12 +44,26 @@
           </el-form-item>
 
           <el-form-item label="邮箱" prop="email">
-            <el-input v-model="upRuleForm.email" autocomplete="on" style="width: 220px"/>
+            <el-input placeholder="请输入您的学校邮箱" v-model="upRuleForm.email" autocomplete="on" style="width: 220px"/>
           </el-form-item>
-          <el-button
-              type="primary"
-              @click="submitUpForm('upRuleForm')"
-          >注册</el-button>
+
+          <el-form-item label="验证码" prop="code">
+            <el-input placeholder="6位验证码" v-model="upRuleForm.code" autocomplete="off" style="width: 220px"/>
+          </el-form-item>
+          <div style="display: flex">
+            <el-button
+                type="info"
+                @click="getCode(upRuleForm.email)"
+                :disabled="show"
+            >
+              <span v-show="!show" style="font-size: 15px">获取验证码</span>
+              <span v-show="show" class="count" style="font-size: 15px">{{seconds}} s后重新获取</span>
+            </el-button>
+            <el-button
+                type="primary"
+                @click="submitUpForm('upRuleForm')"
+            >注册</el-button>
+          </div>
           <!--            <el-button @click="resetForm('ruleForm')">重置</el-button>-->
         </el-form>
       </div>
@@ -112,8 +126,9 @@
 </template>
 
 <script>
-import { register } from '@/api/auth'
+import {getCode, register} from '@/api/auth'
 import Header from "@/components/layout/Header";
+
 export default {
   name: "Authentic",
   components: {Header},
@@ -141,6 +156,10 @@ export default {
       }
     }
     return {
+      seconds: '',
+      timer: null,
+      show: false,
+      verifiedCode: '',
       // 登录
       redirect: undefined,
       loading: false,
@@ -175,7 +194,8 @@ export default {
         name: '',
         pass: '',
         checkPass: '',
-        email: ''
+        email: '',
+        code: ''
       },
       upRules: {
         name: [
@@ -184,6 +204,15 @@ export default {
             min: 2,
             max: 15,
             message: '长度在 2 到 15 个字符',
+            trigger: 'blur'
+          }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          {
+            min: 6,
+            max: 6,
+            message: '6为验证码',
             trigger: 'blur'
           }
         ],
@@ -243,6 +272,14 @@ export default {
     },
     // 注册
     submitUpForm(formName) {
+      if (this.verifiedCode !== this.upRuleForm.code) {
+        this.$message({
+          message: '您的验证码是不是填错了呀',
+          type: 'error',
+          duration: 2000
+        })
+        return false
+      }
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.up_loading = true
@@ -279,7 +316,44 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    }
+    },
+    getCode(to) {
+      if (!this.timer) {
+        this.seconds = 60;
+        this.show = true;
+        this.timer = setInterval(() => {
+          if (this.seconds > 0 && this.seconds <= 60) {
+            this.seconds--;
+          } else {
+            clearInterval(this.timer);
+            this.timer = null;
+            this.show = false;
+          }
+        }, 1000);
+      }
+      if(to === '' || to == null){
+        this.$message({
+          message: '请输入邮箱',
+          type: 'error'
+        })
+      }else {
+        getCode(to)
+            .then(res => {
+              this.verifiedCode = res.data
+              this.$message({
+                message: '验证码已发送，请注意查收。若没有收到，请检查垃圾箱',
+                type: 'success'
+              })
+              // console.log(this.verifiedCode)
+            })
+            .catch(err => {
+              this.$message({
+                message: '系统出错，请联系管理员',
+                type: 'error'
+              })
+            })
+        }
+      }
   }
 }
 </script>
@@ -383,12 +457,12 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid pink;
+  border: 1px solid pink !important;
   background: pink !important;
   color: lightslategray;
   font-size: 15px;
   font-weight: bold;
-  padding: 12px 45px;
+  padding: 12px 35px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
@@ -398,6 +472,12 @@ button {
   color: white;
   background-color: #409EFF !important;
   border-color: #409EFF !important;
+}
+
+.el-button--info {
+  color: white;
+  background-color: lightslategray !important;
+  border-color: lightslategray !important;
 }
 
 
