@@ -81,12 +81,13 @@
             class="demo-ruleForm"
         >
           <h1>Sign In</h1>
-          <el-form-item label="用户名" prop="name" >
-            <el-input v-model="ruleForm.name" style="width: 220px" autocomplete="on"></el-input>
+          <el-form-item label="账号" prop="name" >
+            <el-input placeholder="请输入用户名或邮箱" v-model="ruleForm.name" style="width: 220px" autocomplete="on"></el-input>
           </el-form-item>
 
           <el-form-item label="密码" prop="pass">
             <el-input
+                placeholder="请输入密码"
                 show-password="true"
                 style="width: 220px"
                 type="password"
