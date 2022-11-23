@@ -1,0 +1,249 @@
+<template>
+  <div class="FanOrFollow_box">
+    <div class="FanOrFollow" v-for="(item, index) in allData">
+      <div class="FanOrFollow_left">
+        <img class="FanOrFollow_img" :src="attachImg(item.avatar)" />
+      </div>
+      <div class="FanOrFollow_info">
+        <div class="FanOrFollow_info_top">
+          <span
+              style="color: #666; max-width: 180px"
+              @click="personal(item.id)"
+          >{{ item.alias }}</span
+          >
+        </div>
+        <div class="FanOrFollow_info_bottom">
+          <span @click="personal(item.id)">{{ item.sign }}</span>
+        </div>
+      </div>
+      <div class="FanOrFollow_bottom">
+        <el-button
+            @click="follow(item.id)"
+            type="primary"
+            size="small"
+            round
+            icon="el-icon-check"
+            v-text="isFollowId.indexOf(item.id) > -1 ? '已关注' : '关注'"
+        ></el-button>
+      </div>
+    </div>
+    <div>
+      <el-empty
+          v-if="allData.length === 0"
+          :image-size="250"
+          description="这里什么都没有哟"
+      ></el-empty>
+    </div>
+  </div>
+</template>
+
+<script>
+import {getMyFans, getMyFollowers} from "@/api/follow.js";
+import { attachImg} from "@/utils/attachImg";
+import {mapGetters} from "vuex";
+
+export default {
+  name: "MyFanAndFollow",
+  inject: ["reload"],
+  data() {
+    return {
+      attachImg,
+      allData: [],
+      isFollow: true,
+      followData: {
+        fanId: "",
+        followId: "",
+      },
+      isFollowId: [],
+    };
+  },
+  computed: {
+    ...mapGetters([
+        "token",
+        "user"
+    ]),
+  },
+  watch: {
+    $route(to, from) {
+      if (to.path === `/user/personal/myFans/${this.$route.params.id}`) {
+        getMyFans(this.$route.params.id)
+            .then((res) => {
+              console.log(res);
+              this.allData = res.data;
+              getMyFollowers(this.$route.params.id).then((res) => {
+                res.data.forEach((element) => {
+                  this.isFollowId.push(element.id);
+                });
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      } else {
+        getMyFollowers(this.$route.params.id)
+            .then((res) => {
+              console.log(res);
+              this.allData = res.data;
+              res.data.forEach((element) => {
+                this.isFollowId.push(element.id);
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      }
+    },
+  },
+  mounted() {
+    this.load();
+  },
+  methods: {
+    load() {
+      if (
+          this.$route.path === `/user/personal/myFans/${this.$route.params.id}`
+      ) {
+        getMyFans(this.$route.params.id)
+            .then((res) => {
+              console.log(res);
+              this.allData = res.data;
+              getMyFollowers(this.$route.params.id).then((res) => {
+                res.data.forEach((element) => {
+                  this.isFollowId.push(element.id);
+                });
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      } else {
+        getMyFollowers(this.$route.params.id)
+            .then((res) => {
+              console.log(res);
+              this.allData = res.data;
+              res.data.forEach((element) => {
+                this.isFollowId.push(element.id);
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      }
+    },
+    follow(id) {
+      // if (!this.token) {
+      //   this.$message({
+      //     showClose: true,
+      //     message: "请登录后再进行操作哦",
+      //     type: "warning",
+      //   });
+      //   return;
+      // }
+      // if (this.$store.state.id !== this.$route.params.id) {
+      //   this.$message({
+      //     showClose: true,
+      //     message: "此页面不是你的个人中心哦",
+      //     type: "warning",
+      //   });
+      //   return;
+      // }
+      // this.followData.followId = id;
+      // this.followData.fanId = this.$store.state.id;
+      // if (this.isFollowId.indexOf(this.followData.followId) > -1) {
+      //   this.isFollow = true;
+      // } else {
+      //   this.isFollow = false;
+      // }
+      // if (this.isFollow) {
+      //   deleteFollow(this.followData)
+      //       .then((res) => {
+      //         console.log(res.data);
+      //         this.isFollow = false;
+      //         this.$message({
+      //           showClose: true,
+      //           message: "已取消关注",
+      //           type: "success",
+      //         });
+      //         this.reload();
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //       });
+      // } else if (!this.isFollow) {
+      //   addFollow(this.followData)
+      //       .then((res) => {
+      //         console.log(res.data);
+      //         this.isFollow = true;
+      //         this.$message({
+      //           showClose: true,
+      //           message: "已成功关注",
+      //           type: "success",
+      //         });
+      //         this.reload();
+      //       })
+      //       .catch((err) => {
+      //         console.log(err);
+      //       });
+      // }
+    },
+    personal(id) {
+      this.$router.push({ path: `/member/${id}/home` });
+    },
+  },
+};
+</script>
+
+<style>
+.FanOrFollow_box :hover {
+  border-width: 1px;
+  border-color: deepskyblue;
+}
+.FanOrFollow {
+  padding: 15px 40px 15px 30px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #ebebeb;
+}
+.FanOrFollow :hover {
+  border-width: 1px;
+  border-color: deepskyblue;
+}
+.FanOrFollow_left {
+  width: 60px;
+  height: 60px;
+}
+.FanOrFollow_img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #ebebeb;
+  vertical-align: top;
+}
+.FanOrFollow_info {
+  display: inline-block;
+  margin-left: 20px;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: hidden;
+}
+.FanOrFollow_info_top {
+  display: inline-block;
+  font-size: 10px;
+  line-height: 14px;
+  vertical-align: top;
+  cursor: pointer;
+}
+.FanOrFollow_info_top :hover {
+  color: deepskyblue;
+}
+.FanOrFollow_info_bottom {
+  line-height: 14px;
+  color: #999;
+  margin-top: 5px;
+  cursor: pointer;
+}
+.FanOrFollow_info_bottom :hover {
+  color: deepskyblue;
+}
+</style>

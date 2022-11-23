@@ -39,7 +39,19 @@ const routes = [
     name: 'user',
     path: '/member/:id/home',
     component: Personal,
-    meta: { title: '用户主页' }
+    meta: { title: '个人主页' },
+    children: [
+      {
+        path:'/user/personal/myFans/:id',
+        name:'myFans',
+        component: r => require.ensure([], () => r(require('@/views/user/MyFansAndFollowers')), 'myFans')
+      },
+      {
+        path:'/user/personal/myFollowers/:id',
+        name:'myFollowers',
+        component: r => require.ensure([], () => r(require('@/views/user/MyFansAndFollowers')), 'myFollowers')
+      },
+    ]
   },
   {
     name: 'search',

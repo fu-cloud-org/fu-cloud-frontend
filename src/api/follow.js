@@ -23,3 +23,17 @@ export function isFollowed(postUserId) {
         method: 'get'
     }))
 }
+
+export function getMyFans(id) {
+    return request(({
+        url: `/follow/fans/${id}`,
+        method: 'get'
+    }))
+}
+
+export function getMyFollowers(id) {
+    return request(({
+        url: `/follow/followers/${id}`,
+        method: 'get'
+    }))
+}

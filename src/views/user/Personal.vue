@@ -57,11 +57,11 @@
 
             </div>
             <div class="user_num">
-              <div @click="myfan">
+              <div @click="myFans">
                 <div class="num_number">{{ userProfile.followerCount }}</div>
                 <span class="num_text">粉丝</span>
               </div>
-              <div @click="myfollow">
+              <div @click="myFollowers">
                 <div class="num_number">{{ userProfile.fansCount }}</div>
                 <span class="num_text">关注</span>
               </div>
@@ -76,9 +76,8 @@
           <div class="person_body_left">
             <el-card class="box-card" :body-style="{ padding: '0px' }">
               <div slot="header" class="clearfix">
-            <span class="person_body_list" style="border-bottom: none"
-            >个人中心</span
-            >
+                <span class="person_body_list" style="border-bottom: none"
+                >个人中心</span>
               </div>
               <!-- <div
                 class="person_body_list"
@@ -93,38 +92,41 @@
                   router
                   active-text-color="#00c3ff"
                   class="el-menu-vertical-demo"
+                  :default-active="$route.name"
               >
+<!--                <el-menu-item-->
+<!--                    index="info"-->
+<!--                    :route="{ name: 'info', params: $route.params.id }"-->
+<!--                >-->
+<!--                  <i class="el-icon-user"></i>-->
+<!--                  <span slot="title">个人简介</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item-->
+<!--                    index="myarticle"-->
+<!--                    :route="{ name: 'myarticle', params: $route.params.id }"-->
+<!--                >-->
+<!--                  <i class="el-icon-edit-outline"></i>-->
+<!--                  <span slot="title">发帖</span>-->
+<!--                </el-menu-item>-->
+<!--                <el-menu-item-->
+<!--                    index="mycollect"-->
+<!--                    :route="{ name: 'mycollect', params: $route.params.id }"-->
+<!--                >-->
+<!--                  <i class="el-icon-document"></i>-->
+<!--                  <span slot="title">收藏</span>-->
+<!--                </el-menu-item>-->
                 <el-menu-item
-                    index="info"
-                    :route="{ name: 'info', params: $route.params.id }"
-                >
-                  <i class="el-icon-user"></i>
-                  <span slot="title">个人简介</span>
-                </el-menu-item>
-                <el-menu-item
-                    index="myarticle"
-                    :route="{ name: 'myarticle', params: $route.params.id }"
-                >
-                  <i class="el-icon-edit-outline"></i>
-                  <span slot="title">发帖</span>
-                </el-menu-item>
-                <el-menu-item
-                    index="mycollect"
-                    :route="{ name: 'mycollect', params: $route.params.id }"
-                >
-                  <i class="el-icon-document"></i>
-                  <span slot="title">收藏</span>
-                </el-menu-item>
-                <el-menu-item
-                    index="myfan"
-                    :route="{ name: 'myfan', params: $route.params.id }"
+                    index="myFans"
+                    :route="{ name: 'myFans', params: $route.params.id }"
+                    :class="$route.name === 'myFans' ? 'active' : ''"
                 >
                   <i class="el-icon-tableware"></i>
                   <span slot="title">粉丝</span>
                 </el-menu-item>
                 <el-menu-item
-                    index="myfollow"
-                    :route="{ name: 'myfollow', params: $route.params.id }"
+                    index="myFollowers"
+                    :route="{ name: 'myFollowers', params: $route.params.id }"
+                    :class="$route.name === 'myFollowers' ? 'active' : ''"
                 >
                   <i class="el-icon-circle-plus-outline"></i>
                   <span slot="title">关注</span>
@@ -146,19 +148,13 @@
 
 <script>
 import {attachImg} from "@/utils/attachImg";
-// import { userInfo } from "@/api/user";
-import {
-  myFollow,
-  addFollow,
-  deleteFollow,
-  followAndFanCount, isFollowed, follow, unFollow,
-} from "@/api/follow.js";
+import {isFollowed, follow, unFollow,} from "@/api/follow.js";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {getInfoByName, getUserProfile} from "@/api/auth";
 import {mapGetters} from "vuex";
 import PersonalDia from "@/components/dialog/PersonalDia";
-// import PersonalDia from "./PersonalDia.vue";
+import {followAndFanCount} from "@/api/personal";
 
 export default {
   name: "Personal",
@@ -174,14 +170,14 @@ export default {
       personUser: {},
       attachImg,
       avatar: "",
-      nickname: "",
+      alias: "",
       v: 1,
-      design: "",
+      sign: "",
       followData: {
         fanId: "",
         followId: "",
       },
-      isfollowid: [],
+      isFollowId: [],
       hasFollowed: false,
       userProfile: {
         type: Object,
@@ -194,15 +190,6 @@ export default {
   },
   mounted() {
     this.load();
-  },
-  watch: {
-    $route(to, from) {
-      if (to.path == `/newsuser/personal/${this.$store.state.id}`) {
-        this.reload();
-      } else if (to.path == `/newsuser/personal/${this.$route.params.id}`) {
-        this.reload();
-      }
-    },
   },
   methods: {
     load() {
@@ -249,14 +236,14 @@ export default {
       //       console.log(err);
       //     });
     },
-    myfan() {
+    myFans() {
       this.$router.push({
-        path: `/newsuser/personal/myfan/${this.$route.params.id}`,
+        path: `/user/personal/myFans/${this.$route.params.id}`,
       });
     },
-    myfollow() {
+    myFollowers() {
       this.$router.push({
-        path:`/newsuser/personal/myfollow/${this.$route.params.id}`,
+        path:`/user/personal/myFollowers/${this.$route.params.id}`,
       });
     },
     follow() {
