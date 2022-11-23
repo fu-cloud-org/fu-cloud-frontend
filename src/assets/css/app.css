@@ -159,7 +159,7 @@ img, .el-carousel__mask, .el-carousel__indicator, .el-switch__core, .vditor-tool
     cursor: url(../cursor/pointer.cur),
     default;
 }
-#tab-hot, #tab-latest{
+#tab-hot, #tab-latest, .num_text, .num_number{
     cursor: url(../cursor/pointer.cur),
     default;
 }

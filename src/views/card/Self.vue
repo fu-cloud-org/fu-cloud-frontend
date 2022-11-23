@@ -6,7 +6,7 @@
         </div> &nbsp;
         <div class="has-text-centered">
           <p class="is-size-5 mb-5">
-            <router-link :to="{ path: `/member/${user.username}/home` }">
+            <router-link :to="{ path: `/member/${user.id}/home` }">
               {{ user.alias }} <span class="is-size-7 has-text-grey">{{ '@' + user.username }}</span>
             </router-link>
           </p>

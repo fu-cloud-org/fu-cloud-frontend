@@ -38,7 +38,7 @@
                     <nav class="level has-text-grey is-mobile  is-size-6">
                       <div class="level-left">
                         <div class="level-left">
-                          <router-link class="level-item" :to="{ path: `/member/${item.username}/home` }">
+                          <router-link class="level-item" :to="{ path: `/member/${item.userId}/home` }">
                             <div class="user-avatar">
                               <img :src="attachImg(item.avatar)"/>
                             </div> &nbsp;
@@ -111,7 +111,7 @@
                     <nav class="level has-text-grey is-mobile  is-size-6">
                       <div class="level-left">
                         <div class="level-left">
-                          <router-link class="level-item" :to="{ path: `/member/${item.username}/home` }">
+                          <router-link class="level-item" :to="{ path: `/member/${item.userId}/home` }">
                             <div class="user-avatar">
                               <img :src="attachImg(item.avatar)"/>
                             </div> &nbsp;

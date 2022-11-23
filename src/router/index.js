@@ -9,6 +9,7 @@ import PostDetail from "@/views/post/PostDetail";
 import Edit from "@/views/post/Edit";
 import Tag from "@/views/tag/Tag";
 import Search from "@/views/Search";
+import Personal from "@/views/user/Personal";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,12 @@ const routes = [
       title : '欢迎加入福云',
       keepAlive: true
     }
+  },
+  {
+    name: 'user',
+    path: '/member/:id/home',
+    component: Personal,
+    meta: { title: '用户主页' }
   },
   {
     name: 'search',

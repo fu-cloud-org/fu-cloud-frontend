@@ -46,3 +46,14 @@ export function getUserProfile(userId) {
         params: {userId}
     }))
 }
+
+export function getInfoByName(username, page, size) {
+    return request({
+        url: '/user/' + username,
+        method: 'get',
+        params: {
+            pageNo: page,
+            size: size
+        }
+    })
+}
