@@ -57,3 +57,11 @@ export function getInfoByName(username, page, size) {
         }
     })
 }
+
+export function updateInfo(data) {
+    return request({
+        url: '/user/update',
+        method: 'post',
+        data
+    })
+}

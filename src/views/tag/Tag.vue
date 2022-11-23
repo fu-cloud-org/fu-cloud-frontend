@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 100%; min-height: 100%">
     <Header/>
-    <div class="container" style="margin-top: 90px">
+    <div class="container" style="height: 100%; margin-top: 90px; margin-bottom: 90px">
       <div id="tag" class="columns">
         <div class="column is-three-quarters">
           <el-card class="box-card">
@@ -118,10 +118,9 @@ export default {
 <style scoped>
 #tag {
   min-height: 500px;
-}#footer {
-   position: relative;
-   bottom: 0;
-   width: 100%;
-   height: 2.0rem;
- }
+}
+#footer {
+  width: 100%;
+  height: 150px;
+}
 </style>

@@ -164,11 +164,11 @@ export default {
       }
     }
   },
-  watch: {
-    $route(to, from) {
-      this.fetchPost()
-    }
-  },
+  // watch: {
+  //   $route(to, from) {
+  //     this.fetchPost()
+  //   }
+  // },
 }
 </script>
 

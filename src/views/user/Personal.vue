@@ -10,7 +10,11 @@
           <div class="PersonTop_text">
             <div class="user_text">
               <div class="user_name" style="display: flex">
-                <span> {{ personUser.alias }} </span> &nbsp; &nbsp;
+                <span> {{ personUser.alias }}
+                  <i v-if="userProfile.sex === 1" class="el-icon-male"/>
+                  <i v-if="userProfile.sex === 0" class="el-icon-female"/>
+                </span> &nbsp; &nbsp;
+
                 <div v-if="token">
                   <el-button
                       v-if="personUser.username === user.username"
@@ -173,7 +177,6 @@ export default {
       nickname: "",
       v: 1,
       design: "",
-      isfollow: true,
       followData: {
         fanId: "",
         followId: "",
@@ -299,7 +302,7 @@ export default {
 }
 .PersonTop {
   width: 1000px;
-  height: 170px;
+  height: 160px;
   padding-top: 20px;
   background-color: white;
   margin-top: 30px;
@@ -311,19 +314,19 @@ export default {
 }
 
 .PersonTop_img {
-  width: 150px;
-  height: 130px;
-  background-color: #8c939d;
+  width: 120px;
+  height: 120px;
+  /*background-color: lightgray;*/
   margin-right: 24px;
   margin-left: 20px;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 50%;
 }
 
 .PersonTop_img img {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 50%;
 }
 
 .PersonTop_text {
