@@ -191,8 +191,11 @@ export default {
   mounted() {
     this.load();
   },
+  created() {
+    this.load();
+  },
   methods: {
-    load() {
+    async load() {
       if(this.token != null && this.token !== '') {
         isFollowed(this.$route.params.id).then(value => {
           const { data } = value
@@ -200,11 +203,11 @@ export default {
           // console.log("hasfollow" + this.hasFollowed)
         })
       }
-      getUserProfile(this.$route.params.id).then(res => {
+      await getUserProfile(this.$route.params.id).then(res => {
         const {data} = res
         this.userProfile = data
       })
-      getInfoByName(this.$route.params.id, this.page.current, this.page.size)
+      await getInfoByName(this.$route.params.id, this.page.current, this.page.size)
           .then(res => {
             const {data} = res;
             this.personUser = data.user;
@@ -293,7 +296,7 @@ export default {
   height: 160px;
   padding-top: 20px;
   background-color: white;
-  margin-top: 30px;
+  margin-top: 10px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -381,7 +384,7 @@ export default {
 /*下面部分样式*/
 .person_body {
   width: 1000px;
-  margin-top: 220px;
+  margin-top: 200px;
   display: flex;
   position: absolute;
   left: 50%;
