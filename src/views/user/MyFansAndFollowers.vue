@@ -16,15 +16,24 @@
           <span @click="personal(item.id)">{{ item.sign }}</span>
         </div>
       </div>
-      <div class="FanOrFollow_bottom">
+      <div class="FanOrFollow_bottom" v-show="$route.params.id === user.id">
         <el-button
-            @click="follow(item.id)"
+            v-if="item.isMyFollowed"
+            @click="follow(item.id, item.isMyFollowed)"
             type="primary"
             size="small"
+            class="el-icon-check"
+            plain
             round
-            icon="el-icon-check"
-            v-text="isFollowId.indexOf(item.id) > -1 ? '已关注' : '关注'"
-        ></el-button>
+        >取消关注</el-button>
+        <el-button
+            v-else
+            @click="follow(item.id, item.isMyFollowed)"
+            type="primary"
+            size="small"
+            plain
+            round
+        >关注</el-button>
       </div>
     </div>
     <div>
@@ -66,11 +75,11 @@ export default {
   watch: {
     $route(to, from) {
       if (to.path === `/user/personal/myFans/${this.$route.params.id}`) {
-        getMyFans(this.$route.params.id)
+        getMyFans(this.$route.params.id, this.user.username)
             .then((res) => {
               console.log(res);
               this.allData = res.data;
-              getMyFollowers(this.$route.params.id).then((res) => {
+              getMyFollowers(this.$route.params.id, this.user.username).then((res) => {
                 res.data.forEach((element) => {
                   this.isFollowId.push(element.id);
                 });
@@ -80,7 +89,7 @@ export default {
               console.log(err);
             });
       } else {
-        getMyFollowers(this.$route.params.id)
+        getMyFollowers(this.$route.params.id, this.user.username)
             .then((res) => {
               console.log(res);
               this.allData = res.data;
@@ -102,11 +111,11 @@ export default {
       if (
           this.$route.path === `/user/personal/myFans/${this.$route.params.id}`
       ) {
-        getMyFans(this.$route.params.id)
+        getMyFans(this.$route.params.id, this.user.username)
             .then((res) => {
               console.log(res);
               this.allData = res.data;
-              getMyFollowers(this.$route.params.id).then((res) => {
+              getMyFollowers(this.$route.params.id, this.user.username).then((res) => {
                 res.data.forEach((element) => {
                   this.isFollowId.push(element.id);
                 });
@@ -116,7 +125,7 @@ export default {
               console.log(err);
             });
       } else {
-        getMyFollowers(this.$route.params.id)
+        getMyFollowers(this.$route.params.id, this.user.username)
             .then((res) => {
               console.log(res);
               this.allData = res.data;
@@ -129,61 +138,53 @@ export default {
             });
       }
     },
-    follow(id) {
-      // if (!this.token) {
-      //   this.$message({
-      //     showClose: true,
-      //     message: "请登录后再进行操作哦",
-      //     type: "warning",
-      //   });
-      //   return;
-      // }
-      // if (this.$store.state.id !== this.$route.params.id) {
-      //   this.$message({
-      //     showClose: true,
-      //     message: "此页面不是你的个人中心哦",
-      //     type: "warning",
-      //   });
-      //   return;
-      // }
-      // this.followData.followId = id;
-      // this.followData.fanId = this.$store.state.id;
-      // if (this.isFollowId.indexOf(this.followData.followId) > -1) {
-      //   this.isFollow = true;
-      // } else {
-      //   this.isFollow = false;
-      // }
-      // if (this.isFollow) {
-      //   deleteFollow(this.followData)
-      //       .then((res) => {
-      //         console.log(res.data);
-      //         this.isFollow = false;
-      //         this.$message({
-      //           showClose: true,
-      //           message: "已取消关注",
-      //           type: "success",
-      //         });
-      //         this.reload();
-      //       })
-      //       .catch((err) => {
-      //         console.log(err);
-      //       });
-      // } else if (!this.isFollow) {
-      //   addFollow(this.followData)
-      //       .then((res) => {
-      //         console.log(res.data);
-      //         this.isFollow = true;
-      //         this.$message({
-      //           showClose: true,
-      //           message: "已成功关注",
-      //           type: "success",
-      //         });
-      //         this.reload();
-      //       })
-      //       .catch((err) => {
-      //         console.log(err);
-      //       });
-      // }
+    follow(id, isMyFollowed) {
+      if (!this.token) {
+        this.$message({
+          showClose: true,
+          message: "请登录后再进行操作哦",
+          type: "warning",
+        });
+        return;
+      }
+      this.followData.followId = id;
+      this.followData.fanId = this.$store.state.id;
+      if (this.isFollowId.indexOf(this.followData.followId) > -1) {
+        this.isFollow = true;
+      } else {
+        this.isFollow = false;
+      }
+      if (this.isFollow) {
+        deleteFollow(this.followData)
+            .then((res) => {
+              console.log(res.data);
+              this.isFollow = false;
+              this.$message({
+                showClose: true,
+                message: "已取消关注",
+                type: "success",
+              });
+              this.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      } else if (!this.isFollow) {
+        addFollow(this.followData)
+            .then((res) => {
+              console.log(res.data);
+              this.isFollow = true;
+              this.$message({
+                showClose: true,
+                message: "已成功关注",
+                type: "success",
+              });
+              this.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+      }
     },
     personal(id) {
       this.$router.push({ path: `/member/${id}/home` });
@@ -195,28 +196,28 @@ export default {
 <style>
 .FanOrFollow_box :hover {
   border-width: 1px;
-  border-color: deepskyblue;
+  /*border-color: deepskyblue;*/
 }
 .FanOrFollow {
   padding: 15px 40px 15px 30px;
-  height: 50px;
+  height: 70px;
   display: flex;
   align-items: center;
-  border: 1px solid #ebebeb;
+  /*border: 1px solid #ebebeb;*/
 }
 .FanOrFollow :hover {
   border-width: 1px;
-  border-color: deepskyblue;
+  /*border-color: deepskyblue;*/
 }
 .FanOrFollow_left {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
 }
 .FanOrFollow_img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 1px solid #ebebeb;
+  /*border: 1px solid #ebebeb;*/
   vertical-align: top;
 }
 .FanOrFollow_info {

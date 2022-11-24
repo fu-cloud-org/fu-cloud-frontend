@@ -24,16 +24,22 @@ export function isFollowed(postUserId) {
     }))
 }
 
-export function getMyFans(id) {
+export function getMyFans(id, username) {
     return request(({
         url: `/follow/fans/${id}`,
-        method: 'get'
+        method: 'get',
+        params: {
+            username: username
+        }
     }))
 }
 
-export function getMyFollowers(id) {
+export function getMyFollowers(id, username) {
     return request(({
         url: `/follow/followers/${id}`,
-        method: 'get'
+        method: 'get',
+        params: {
+            username: username
+        }
     }))
 }
