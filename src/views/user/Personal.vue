@@ -196,7 +196,8 @@ export default {
       if(this.token != null && this.token !== '') {
         isFollowed(this.$route.params.id).then(value => {
           const { data } = value
-          this.hasFollowed = data.hasFollowed
+          this.hasFollowed = data.hasFollow
+          // console.log("hasfollow" + this.hasFollowed)
         })
       }
       getUserProfile(this.$route.params.id).then(res => {
