@@ -183,7 +183,7 @@ export default {
     this.load();
   },
   created() {
-    this.load();
+    // this.load();
   },
   methods: {
     async load() {
@@ -203,33 +203,6 @@ export default {
             const {data} = res;
             this.personUser = data.user;
           })
-
-      // myFollow(this.$store.state.id)
-      //     .then((res) => {
-      //       res.data.forEach((res) => {
-      //         this.isfollowid.push(res.id);
-      //       });
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      //
-      // followAndFanCount(this.$route.params.id)
-      //     .then((res) => {
-      //       this.followCounts = res.data.followCounts;
-      //       this.fanCounts = res.data.fanCounts;
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      //
-      // mygoodCount(this.$route.params.id)
-      //     .then((res) => {
-      //       this.goodCounts = res.data.goodCounts;
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
     },
     myFans() {
       this.$router.push({
@@ -241,21 +214,27 @@ export default {
         path:`/user/personal/myFollowers/${this.$route.params.id}`,
       });
     },
-    follow() {
+    async follow() {
       if(this.token != null && this.token !== '' && !this.hasFollowed)
       {
-        follow(this.$route.params.id).then(response => {
+        await follow(this.$route.params.id).then(response => {
           const { message } = response
           this.$message.success(message)
           this.hasFollowed = !this.hasFollowed
           this.userProfile.followerCount = parseInt(this.userProfile.followerCount) + 1
         })
       } else if(this.token != null && this.token !== '' && this.hasFollowed) {
-        unFollow(this.$route.params.id).then(response => {
+        await unFollow(this.$route.params.id).then(response => {
           const { message } = response
           this.$message.success(message)
           this.hasFollowed = !this.hasFollowed
           this.userProfile.followerCount = parseInt(this.userProfile.followerCount) - 1
+        })
+      } else {
+        this.$message({
+          showClose: true,
+          message: '请先登录再进行操作哦',
+          type: 'warning',
         })
       }
     },

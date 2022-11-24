@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import {getMyFans, getMyFollowers} from "@/api/follow.js";
+import {follow, getMyFans, getMyFollowers, unFollow} from "@/api/follow.js";
 import { attachImg} from "@/utils/attachImg";
 import {mapGetters} from "vuex";
 
@@ -139,51 +139,24 @@ export default {
       }
     },
     follow(id, isMyFollowed) {
-      if (!this.token) {
+      if(this.token != null && this.token !== '' && !isMyFollowed){
+        follow(id).then(res => {
+          const {msg} = res;
+          this.$message.success(msg);
+          this.load();
+        })
+      } else if(this.token != null && this.token !== '' && isMyFollowed){
+        unFollow(id).then(res => {
+          const {msg} = res;
+          this.$message.success(msg);
+          this.load();
+        })
+      } else {
         this.$message({
           showClose: true,
-          message: "请登录后再进行操作哦",
-          type: "warning",
-        });
-        return;
-      }
-      this.followData.followId = id;
-      this.followData.fanId = this.$store.state.id;
-      if (this.isFollowId.indexOf(this.followData.followId) > -1) {
-        this.isFollow = true;
-      } else {
-        this.isFollow = false;
-      }
-      if (this.isFollow) {
-        deleteFollow(this.followData)
-            .then((res) => {
-              console.log(res.data);
-              this.isFollow = false;
-              this.$message({
-                showClose: true,
-                message: "已取消关注",
-                type: "success",
-              });
-              this.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-      } else if (!this.isFollow) {
-        addFollow(this.followData)
-            .then((res) => {
-              console.log(res.data);
-              this.isFollow = true;
-              this.$message({
-                showClose: true,
-                message: "已成功关注",
-                type: "success",
-              });
-              this.reload();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          message: '请先登录再进行操作哦',
+          type: 'warning'
+        })
       }
     },
     personal(id) {
