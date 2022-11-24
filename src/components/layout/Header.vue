@@ -17,12 +17,13 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <b-field position="is-centered">
-            <el-input placeholder="搜索帖子、标签和用户"
+            <el-input placeholder="请输入关键字"
                       border-radius=4
                       v-model="searchKey"
                       @keyup.enter.native="search()"
                       size="medium"
                       prefix-icon="el-icon-search"
+                      v-show="$route.name !== 'Authentic'"
             />
           </b-field>
         </b-navbar-item>

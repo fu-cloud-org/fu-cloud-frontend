@@ -2,6 +2,7 @@
   <div>
     <self
         :user="self"
+         v-show="token"
     />
 
     <tip/>

@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="FanOrFollow_bottom" v-show="$route.params.id === user.id">
-        <el-button
+        <el-buttong
             v-if="item.isMyFollowed"
             @click="follow(item.id, item.isMyFollowed)"
             type="primary"
@@ -25,7 +25,7 @@
             class="el-icon-check"
             plain
             round
-        >取消关注</el-button>
+        >取消关注</el-buttong>
         <el-button
             v-else
             @click="follow(item.id, item.isMyFollowed)"
