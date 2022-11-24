@@ -79,15 +79,6 @@
                 <span class="person_body_list" style="border-bottom: none"
                 >个人中心</span>
               </div>
-              <!-- <div
-                class="person_body_list"
-                v-for="(item, index) in person_body_list"
-                :key="index"
-              >
-                <router-link :to="{ name: item.name, params: item.params }">{{
-                  item.label
-                }}</router-link>
-              </div> -->
               <el-menu
                   router
                   active-text-color="#00c3ff"
@@ -296,7 +287,7 @@ export default {
   height: 160px;
   padding-top: 20px;
   background-color: white;
-  margin-top: 10px;
+  margin-top: 0px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -406,7 +397,7 @@ export default {
   margin-top: 25px;
   font-size: 22px;
   font-weight: bolder;
-  border-bottom: 1px solid #f0f0f0;
+  /*border-bottom: 1px solid #f0f0f0;*/
   background-image: -webkit-linear-gradient(
       left,
       #3498db,
@@ -435,6 +426,10 @@ export default {
 
 .box-card {
   height: 500px;
+}
+
+.el-menu {
+  border-right: 0;
 }
 
 </style>

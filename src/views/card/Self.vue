@@ -2,7 +2,9 @@
     <el-card class="box-card">
       <div v-if="token != null && token !== ''" >
         <div class="user-avatar">
-          <img :src="attachImg(user.avatar)"/>
+          <router-link :to="{ path: `/member/${user.id}/home` }">
+            <img :src="attachImg(user.avatar)"/>
+          </router-link>
         </div> &nbsp;
         <div class="has-text-centered">
           <p class="is-size-5 mb-5">

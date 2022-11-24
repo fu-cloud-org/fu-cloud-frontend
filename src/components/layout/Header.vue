@@ -60,20 +60,20 @@
         >
           <b-navbar-item
               tag="router-link"
-              :to="{ path: `/member/${user.username}/home` }"
+              :to="{ path: `/member/${user.id}/home` }"
           >
 <!--            <i class="el-icon-user-solid" style="font-size: 20px"/> &nbsp; 个人中心-->
             <div class="user-avatar">
               <img :src="attachImg(user.avatar)"/>
             </div> &nbsp; 个人中心
           </b-navbar-item>
-          <hr class="dropdown-divider">
-          <b-navbar-item
-              tag="router-link"
-              :to="{ path: `/member/${user.username}/setting` }"
-          >
-            <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心
-          </b-navbar-item>
+<!--          <hr class="dropdown-divider">-->
+<!--          <b-navbar-item-->
+<!--              tag="router-link"-->
+<!--              :to="{ path: `/member/${user.username}/setting` }"-->
+<!--          >-->
+<!--            <i class="el-icon-s-tools" style="font-size: 20px"/> &nbsp; 设置中心-->
+<!--          </b-navbar-item>-->
           <hr class="dropdown-divider">
           <b-navbar-item
               tag="a"
