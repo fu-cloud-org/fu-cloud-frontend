@@ -6,3 +6,10 @@ export function followAndFanCount(id) {
         method: 'get'
     })
 }
+
+export function getMyPosts(id) {
+    return request({
+        url: `/post/getMyPosts/${id}`,
+        method: 'get'
+    })
+}

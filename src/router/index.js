@@ -51,6 +51,11 @@ const routes = [
         name:'myFollowers',
         component: r => require.ensure([], () => r(require('@/views/user/MyFansAndFollowers')), 'myFollowers')
       },
+      {
+        path:'/user/personal/myPosts/:id',
+        name:'myPosts',
+        component: r => require.ensure([], () => r(require('@/views/user/MyPosts')), 'myPosts')
+      }
     ]
   },
   {
