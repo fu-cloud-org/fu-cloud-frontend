@@ -49,7 +49,8 @@
               </div>
               <div class="user-v" >
                 <i class="el-icon-school"/> &nbsp;
-                <span class="user-v-font">{{ personUser.dep }}</span>
+                <span class="user-v-font">{{ personUser.dep }}</span> &nbsp;
+                <span style="font-size: 11px; color: lightslategray">{{ personUser.regional }}</span>
               </div>
               <div class="user_sign">
                 <span> {{ personUser.sign }}</span>
@@ -315,7 +316,7 @@ export default {
 }
 .user-v-font {
   font-size: 15px;
-  color: #00c3ff;
+  /*color: #00c3ff;*/
 }
 .user_sign {
   font-size: 14px;

@@ -198,6 +198,16 @@ i:hover{
     default;
 }
 
+span{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+
+.el-menu-item{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}
+
 .categoryBar-list-item{
     cursor: url(../cursor/pointer.cur),
     default;

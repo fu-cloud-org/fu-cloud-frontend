@@ -1,16 +1,16 @@
 <template>
-  <div class="FanOrFollow_box">
+  <div class="FanOrFollow_box" style="padding: 15px">
     <div class="FanOrFollow" v-for="(item, index) in allData">
-      <div class="FanOrFollow_left">
-        <img class="FanOrFollow_img" :src="attachImg(item.avatar)" />
+      <div class="FanOrFollow_left" @click="personal(item.id)">
+        <img class="FanOrFollow_img" :src="attachImg(item.avatar)"/>
       </div>
       <div class="FanOrFollow_info">
         <div class="FanOrFollow_info_top">
           <span
-              style="color: #666; max-width: 180px"
+              style="font-weight: bolder; font-size: 15px"
               @click="personal(item.id)"
-          >{{ item.alias }}</span
-          >
+          >{{ item.alias }}</span>
+          <span style="color: lightslategray" @click="personal(item.id)">@{{ item.username }}</span>
         </div>
         <div class="FanOrFollow_info_bottom">
           <span @click="personal(item.id)">{{ item.sign }}</span>
@@ -172,7 +172,8 @@ export default {
   /*border-color: deepskyblue;*/
 }
 .FanOrFollow {
-  padding: 15px 40px 15px 30px;
+  /*padding: 15px 40px 15px 30px;*/
+  padding: 1px 30px 1px 30px;
   height: 70px;
   display: flex;
   align-items: center;
@@ -183,8 +184,8 @@ export default {
   /*border-color: deepskyblue;*/
 }
 .FanOrFollow_left {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 .FanOrFollow_img {
   width: 100%;
@@ -197,11 +198,13 @@ export default {
   display: inline-block;
   margin-left: 20px;
   -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
+  /*-ms-flex-positive: 1;*/
   flex-grow: 1;
+  height: 50px;
   overflow: hidden;
 }
 .FanOrFollow_info_top {
+  margin-top: 2px;
   display: inline-block;
   font-size: 10px;
   line-height: 14px;
