@@ -163,4 +163,11 @@ img {
   margin-bottom: 10px;
   display: flex;
 }
+
+.preImg img {
+  max-width: 700px;
+  max-height: 90px;
+  width: auto;
+  border-radius: 10px;
+}
 </style>

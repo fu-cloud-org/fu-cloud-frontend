@@ -128,8 +128,8 @@
           </div>
         </div>
       </div>
-      <personal-dia ref="dia" @flesh="reload" />
-      <update-avatar-dia ref="updateAvatarDia" @flesh="reload" />
+      <personal-dia ref="dia" @flesh="reload" v-show="user.id === $route.params.id"/>
+      <update-avatar-dia ref="updateAvatarDia" @flesh="reload" v-show="user.id === $route.params.id"/>
     </div>
     <Footer id="footer"/>
   </div>
