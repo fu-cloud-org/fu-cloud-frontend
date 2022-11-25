@@ -73,6 +73,7 @@
             </div>
             <div style="margin: 15px 0;"/>
             <b>封面（可选）：</b>
+            <div>文章发布后封面就不可修改了哦～</div>
             <div style="margin: 15px 0;"/>
             <div class="pointer-fk">
               <el-upload

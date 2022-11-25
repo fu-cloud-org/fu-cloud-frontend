@@ -55,44 +55,10 @@
               </el-input>
             </div>
             <div style="margin: 15px 0;"/>
-            <b>封面（可选）：</b>
+            <b>封面：</b>
             <div style="margin: 15px 0;"/>
             <div>
-              <el-upload
-                  ref="upload"
-                  :action="upload()"
-                  list-type="picture-card"
-                  :on-change="handleChange"
-                  :on-success="handleSuccess"
-                  :on-remove="handleRemove"
-                  :before-upload="beforeCoverUpload"
-                  :class="{hide:hideUpload}"
-                  :auto-upload="true">
-                <i slot="default" class="el-icon-plus"></i>
-                <div slot="file" slot-scope="{file}">
-                  <img
-                      class="el-upload-list__item-thumbnail"
-                      :src="file.url" alt=""
-                  >
-                  <span class="el-upload-list__item-actions">
-                    <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)">
-                      <i class="el-icon-zoom-in"></i>
-                    </span>
-                    <span
-                        v-if="!disabled"
-                        class="el-upload-list__item-delete"
-                        @click="handleRemove(file)"
-                    >
-                      <i class="el-icon-delete"></i>
-                    </span>
-                  </span>
-                </div>
-              </el-upload>
-              <el-dialog :visible.sync="dialogVisible">
-                <img width="100%" :src="dialogImageUrl" alt="">
-              </el-dialog>
+              <img :src="attachImg(post.cover)" style="width: 100%; height: 100%"/>
             </div>
           </el-card>
         </div>
@@ -110,11 +76,14 @@ import "vditor/dist/index.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {ref} from "vue";
+import {attachImg} from "@/utils/attachImg";
+
 export default {
   name: "PostEdit",
   components: {Footer, Header},
   data() {
     return {
+      attachImg,
       uploadTypes: ref(["jpg", "jpeg", "png", "gif"]),
       dialogImageUrl: '',
       dialogVisible: false,

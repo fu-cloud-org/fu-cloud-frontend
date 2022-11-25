@@ -38,6 +38,7 @@ const routes = [
   {
     name: 'user',
     path: '/member/:id/home',
+    redirect: '/user/personal/myPosts/:id',
     component: Personal,
     meta: { title: '个人主页' },
     children: [

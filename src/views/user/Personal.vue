@@ -181,20 +181,9 @@ export default {
   },
   mounted() {
     this.load();
-    if (this.$route.name === 'user')
-      this.$router.push({name: 'myPosts', params: {id: this.$route.params.id}});
   },
   created() {
     this.load();
-    if (this.$route.name === 'user')
-      this.$router.push({name: 'myPosts', params: {id: this.$route.params.id}});
-  },
-  watch: {
-    $route(to, from) {
-      if (to.name === 'user') {
-        this.$router.push({name: 'myPosts', params: {id: this.$route.params.id}});
-      }
-    }
   },
   methods: {
     async load() {

@@ -25,9 +25,11 @@
       {{summary}}
     </div>
     <div class="preImg">
-      <div style="margin-right:30px;width:120px">
-        <img v-image-preview :src="attachImg(cover)">
-      </div>
+      <router-link :to="{name:'post-detail',params:{id}}">
+        <div style="margin-right:30px;width:120px">
+          <img v-image-preview :src="attachImg(cover)">
+        </div>
+      </router-link>
     </div>
     <div class="me-article-footer">
           <span class="me-article-author" @click="personal(userId)">
