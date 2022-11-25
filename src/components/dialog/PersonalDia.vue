@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-dialog
+        custom-class="dialogClass"
         title="修改个人信息"
         :visible.sync="dialogVisible"
         width="60%"

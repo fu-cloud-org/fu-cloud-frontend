@@ -231,3 +231,10 @@ span{
         transparent
     );
 }
+
+.dialogClass{ border-radius: 20px; }
+
+.el-upload-list, .el-upload-list--picture-card, .pointer-fk, .el-upload, .el-upload--picture-card{
+    cursor: url(../cursor/pointer.cur),
+    default;
+}

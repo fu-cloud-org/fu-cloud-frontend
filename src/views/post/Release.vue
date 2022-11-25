@@ -74,7 +74,7 @@
             <div style="margin: 15px 0;"/>
             <b>封面（可选）：</b>
             <div style="margin: 15px 0;"/>
-            <div>
+            <div class="pointer-fk">
               <el-upload
                   ref="upload"
                   :action="upload()"
@@ -86,15 +86,16 @@
                   :class="{hide:hideUpload}"
                   :auto-upload="true">
                 <i slot="default" class="el-icon-plus"></i>
-                <div slot="file" slot-scope="{file}">
-                  <img
-                      class="el-upload-list__item-thumbnail"
-                      :src="file.url" alt=""
-                  >
-                  <span class="el-upload-list__item-actions">
+                <div slot="file" slot-scope="{file}" class="pointer-fk">
+                    <img
+                        style="position: absolute; margin: auto; max-width: 250px"
+                        class="el-upload-list__item-thumbnail"
+                        :src="file.url" alt=""
+                    >
+                    <span class="el-upload-list__item-actions">
                     <span
-                      class="el-upload-list__item-preview"
-                      @click="handlePictureCardPreview(file)">
+                        class="el-upload-list__item-preview"
+                        @click="handlePictureCardPreview(file)">
                       <i class="el-icon-zoom-in"></i>
                     </span>
                     <span
@@ -163,7 +164,7 @@ export default {
     }
   },
   created() {
-    this.userName = this.user.alias;
+    this.userName = this.user.username;
   },
   computed: {
     ...mapGetters(['token', 'user'])
@@ -207,10 +208,10 @@ export default {
             alert('帖子内容不可为空')
             return false
           }
-          if (this.ruleForm.tags == null || this.ruleForm.tags.length === 0) {
-            alert('标签不可以为空')
-            return false
-          }
+          // if (this.ruleForm.tags == null || this.ruleForm.tags.length === 0) {
+          //   alert('标签不可以为空')
+          //   return false
+          // }
           this.ruleForm.content = this.contentEditor.getValue()
           release(this.ruleForm, this.userName).then((response) => {
             const { data } = response
@@ -220,7 +221,9 @@ export default {
                 params: { id: data.id }
               })
               // console.log(data)
+              this.resetForm(formName)
             }, 800)
+
           })
         } else {
           console.log('error submit!!')
