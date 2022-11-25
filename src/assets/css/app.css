@@ -234,7 +234,7 @@ span{
 
 .dialogClass{ border-radius: 20px; }
 
-.el-upload-list, .el-upload-list--picture-card, .pointer-fk, .el-upload, .el-upload--picture-card{
+.el-upload-list, .el-upload-list--picture-card, .pointer-fk, .el-upload, .el-upload--picture-card, .el-upload-dragger{
     cursor: url(../cursor/pointer.cur),
     default;
 }
