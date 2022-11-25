@@ -6,7 +6,7 @@
         <div class="PersonTop">
           <div class="PersonTop_img">
             <img :src="attachImg(personUser.avatar)" class="avatarCSS" @click="updateAvatar"/>
-            <div class="mask">
+            <div class="mask" v-show="user.id === $route.params.id">
               <h3><i class="el-icon-camera-solid"/></h3>
             </div>
           </div>
@@ -247,6 +247,7 @@ export default {
       this.$refs.dia.open();
     },
     updateAvatar() {
+      if (this.user.id !== this.$route.params.id) return
       this.$refs.updateAvatarDia.open();
     }
   },
