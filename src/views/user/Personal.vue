@@ -5,7 +5,10 @@
       <div class="container" style="margin-top: 90px; margin-bottom: 90px">
         <div class="PersonTop">
           <div class="PersonTop_img">
-            <img :src="attachImg(personUser.avatar)" />
+            <img :src="attachImg(personUser.avatar)" class="avatarCSS" @click="updateAvatar"/>
+            <div class="mask">
+              <h3><i class="el-icon-camera-solid"/></h3>
+            </div>
           </div>
           <div class="PersonTop_text">
             <div class="user_text">
@@ -126,6 +129,7 @@
         </div>
       </div>
       <personal-dia ref="dia" @flesh="reload" />
+      <update-avatar-dia ref="updateAvatarDia" @flesh="reload" />
     </div>
     <Footer id="footer"/>
   </div>
@@ -141,10 +145,11 @@ import {getInfoByName, getUserProfile} from "@/api/auth";
 import {mapGetters} from "vuex";
 import PersonalDia from "@/components/dialog/PersonalDia";
 import {followAndFanCount} from "@/api/personal";
+import UpdateAvatarDia from "@/components/dialog/UpdateAvatarDia";
 
 export default {
   name: "Personal",
-  components: {PersonalDia, Footer, Header},
+  components: {UpdateAvatarDia, PersonalDia, Footer, Header},
   inject: ["reload"],
   data() {
     return {
@@ -247,6 +252,9 @@ export default {
     edit() {
       this.$refs.dia.open();
     },
+    updateAvatar() {
+      this.$refs.updateAvatarDia.open();
+    }
   },
 };
 </script>
@@ -288,12 +296,35 @@ export default {
   margin-left: 20px;
   overflow: hidden;
   border-radius: 50%;
+  display: block;
+  position: relative;
 }
 
 .PersonTop_img img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  display: block;
+}
+.mask {
+  position: absolute;
+  background: rgba(101, 101, 101, 0.6);
+  color: #ffffff;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  pointer-events:none;
+}
+.mask h3 {
+  text-align: center;
+  margin-top: 25%;
+  font-size: 40px;
+}
+.PersonTop_img:hover .mask {
+  opacity: 1;
 }
 
 .PersonTop_text {

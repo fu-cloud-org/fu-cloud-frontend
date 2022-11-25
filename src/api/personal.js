@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import request, {getBaseURL} from '@/utils/request'
 
 export function followAndFanCount(id) {
     return request({
@@ -13,3 +13,20 @@ export function getMyPosts(id) {
         method: 'get'
     })
 }
+
+export function updateAvatar(userName, avatarPath) {
+    return request({
+        url: `/user/updateAvatar`,
+        method: 'get',
+        params: {
+            userName: userName,
+            avatarPath: avatarPath,
+        }
+    })
+}
+
+const avatarApi = {
+    uploadAvatar: (userName) => `${getBaseURL()}/user/uploadAvatar?userName=${userName}`,
+}
+
+export { avatarApi }
