@@ -69,7 +69,7 @@
                 <div class="num_number">{{ userProfile.fansCount }}</div>
                 <span class="num_text">关注</span>
               </div>
-              <div>
+              <div @click="myPosts">
                 <div class="num_number">{{ userProfile.postCount }}</div>
                 <span class="num_text">帖子</span>
               </div>
@@ -223,6 +223,11 @@ export default {
     myFollowers() {
       this.$router.push({
         path:`/user/personal/myFollowers/${this.$route.params.id}`,
+      });
+    },
+    myPosts() {
+      this.$router.push({
+        path: `/user/personal/myPosts/${this.$route.params.id}`,
       });
     },
     async follow() {
@@ -438,6 +443,7 @@ export default {
   /* height: 500px; */
   border-radius: 5px;
   background-color: white;
+  min-height: 700px;
   max-height: 700px;
   overflow-y: auto
 }
