@@ -73,7 +73,7 @@
               </div>
               <div class="media-right" style="margin-left: -100%; float: right">
                 <figure class="image is-128x128">
-                  <img :src="attachImg(item.cover)" style="position: absolute; top: 0; bottom: 0; margin: auto"/>
+                  <img :src="attachImg(item.cover)" style="position: absolute; top: 0; bottom: 0; margin: auto; border-radius: 10px"/>
                 </figure>
               </div>
             </div>

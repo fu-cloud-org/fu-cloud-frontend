@@ -40,7 +40,7 @@
                     maxlength="15"
                     maxtags="3"
                     ellipsis
-                    placeholder="请输入主题标签，限制为 15 个字符和 3 个标签"
+                    placeholder="键入回车生成标签，最多3个标签，每个标签不多于15个字符"
                 />
 
                 <el-form-item>
