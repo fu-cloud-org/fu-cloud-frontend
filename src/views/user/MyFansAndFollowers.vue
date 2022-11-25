@@ -16,8 +16,8 @@
           <span @click="personal(item.id)">{{ item.sign }}</span>
         </div>
       </div>
-      <div class="FanOrFollow_bottom" v-show="$route.params.id === user.id">
-        <el-buttong
+      <div class="FanOrFollow_bottom" v-show="$route.params.id === user.id && $route.name === 'myFollowers'">
+        <el-button
             v-if="item.isMyFollowed"
             @click="follow(item.id, item.isMyFollowed)"
             type="primary"
@@ -25,7 +25,7 @@
             class="el-icon-check"
             plain
             round
-        >取消关注</el-buttong>
+        >取消关注</el-button>
         <el-button
             v-else
             @click="follow(item.id, item.isMyFollowed)"
