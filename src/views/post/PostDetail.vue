@@ -43,6 +43,17 @@
                   </b-taglist>
                 </p>
               </div>
+              <div class="level-right">
+                <el-button size="small" v-if="token" @click="collect">
+                  <i class="fa fa-thumbs-o-up" style="font-size: 20px" v-if="!isMyCollect"></i>
+                  <i class="fa fa-thumbs-up" style="font-size: 20px" v-else></i>
+                  {{post.collects}}
+                </el-button>
+                <el-button size="small" v-else disabled>
+                  <i class="fa fa-thumbs-o-up" style="font-size: 20px"></i>
+                  {{post.collects}}
+                </el-button>
+              </div>
               <div
                   v-if="token && user.id === postUser.id"
                   class="level-right"
@@ -95,6 +106,7 @@ import Header from "@/components/layout/Header";
 import Recommend from "@/views/card/Recommend";
 import Footer from "@/components/layout/Footer";
 import Comments from "@/components/Comment/Comments";
+import {cancelCollect, isMyCollect, setCollect} from "@/api/collect";
 
 export default {
   name: 'postDetail',
@@ -106,6 +118,7 @@ export default {
   },
   data() {
     return {
+      isMyCollect: false,
       flag: false,
       post: {
         content: '',
@@ -137,6 +150,12 @@ export default {
         this.flag = true
         // history.go(0)
       })
+      if (this.token) {
+        isMyCollect(this.$route.params.id, this.user.username).then(response => {
+          this.isMyCollect = (response.data.isCollected === 'true')
+          console.log(this.isMyCollect)
+        })
+      }
     },
     async handleDelete(id) {
       const confirmResult = await
@@ -162,6 +181,26 @@ export default {
           message: '您已取消删除操作'
         })
       }
+    },
+    async collect() {
+      if (!this.token) {
+        this.$message({
+          type: 'error',
+          message: '请先登录'
+        })
+        return
+      }
+       if (this.isMyCollect) {
+         await cancelCollect(this.$route.params.id, this.user.username).then(response => {
+           this.isMyCollect = false
+           this.post.collects--
+         })
+       } else {
+         await setCollect(this.$route.params.id, this.user.username).then(response => {
+           this.isMyCollect = true
+           this.post.collects++
+         })
+       }
     }
   },
   // watch: {

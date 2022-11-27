@@ -65,7 +65,8 @@ export default {
     },
     async deleteComment(id) {
       const confirmResult = await
-          this.$confirm('此操作将会永久删除该帖子，不可恢复，是否继续执行',
+          this.$confirm('此操作将会永久删除该评论，不可恢复，是否继续执行.' +
+              '(评论删除后刷新页面就不见了哦～)',
               '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',

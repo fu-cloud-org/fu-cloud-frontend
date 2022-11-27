@@ -18,7 +18,7 @@
                   </span>
                   <span class="is-hidden-mobile" style="margin-left: 15px">
                     <router-link :to="{name:'post-detail',params:{id:item.id}}">
-                      <i class="el-icon-collection-tag"/> {{ item.collects === 0 ? '' : item.collects }}
+                     <i class="fa fa-thumbs-o-up"/> {{ item.collects === 0 ? '' : item.collects }}
                     </router-link>
                   </span>
                   <span
@@ -94,7 +94,7 @@
                   </span>
                   <span class="is-hidden-mobile" style="margin-left: 15px">
                     <router-link :to="{name:'post-detail',params:{id:item.id}}">
-                      <i class="el-icon-collection-tag"/> {{ item.collects === 0 ? '' : item.collects }}
+                      <i class="fa fa-thumbs-o-up"/> {{ item.collects === 0 ? '' : item.collects }}
                     </router-link>
                   </span>
                   <span

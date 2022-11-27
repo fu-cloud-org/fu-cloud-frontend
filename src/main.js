@@ -13,6 +13,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import './assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css'
 import {MessageBox} from "element-ui";
 import 'dayjs/locale/zh-cn'
+import Icon from 'vue-awesome/components/Icon'
 const dayjs = require('dayjs');
 
 dayjs.extend(relativeTime)
@@ -31,6 +32,7 @@ Vue.use(ElementUI);
 Vue.use(Buefy);
 
 Vue.config.productionTip = false
+Vue.component('v-icon', Icon)
 
 new Vue({
   router,

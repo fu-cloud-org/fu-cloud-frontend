@@ -271,6 +271,7 @@ export default {
   top: 0;
 }
 .PersonTop {
+  box-shadow: 8px 8px 5px lightslategray;
   width: 1000px;
   height: 160px;
   padding-top: 20px;
