@@ -38,18 +38,20 @@ export function getRecommendPosts(id) {
     })
 }
 
-export function update(topic) {
+export function update(topic, userName) {
     return request({
         url: '/post/update',
         method: 'post',
-        data: topic
+        data: topic,
+        params: { userName: userName }
     })
 }
 
-export function deletePost(id) {
+export function deletePost(id,userName) {
     return request({
         url: `/post/delete/${id}`,
-        method: 'delete'
+        method: 'delete',
+        params: { userName: userName }
     })
 }
 

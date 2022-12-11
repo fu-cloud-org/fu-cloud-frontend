@@ -113,7 +113,7 @@ export default {
   components: {Comments, Footer, Recommend, Header, Author},
   computed: {
     ...mapGetters([
-      'token', 'user'
+      'token', 'user', "userName"
     ])
   },
   data() {
@@ -166,7 +166,7 @@ export default {
                 type: "warning"
               }).catch(err => err)
       if(confirmResult === 'confirm'){
-        deletePost(id).then(value => {
+        deletePost(id,this.userName).then(value => {
           const {code, message} = value
           this.$message.success('删除成功')
           if (code === 200) {

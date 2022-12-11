@@ -177,7 +177,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['token', 'user'])
+    ...mapGetters(['token', 'user', "userName"])
   },
   mounted() {
     this.load();
@@ -188,7 +188,7 @@ export default {
   methods: {
     async load() {
       if(this.token != null && this.token !== '') {
-        isFollowed(this.$route.params.id).then(value => {
+        isFollowed(this.$route.params.id,this.userName).then(value => {
           const { data } = value
           this.hasFollowed = data.hasFollow
           // console.log("hasfollow" + this.hasFollowed)
@@ -222,14 +222,14 @@ export default {
     async follow() {
       if(this.token != null && this.token !== '' && !this.hasFollowed)
       {
-        await follow(this.$route.params.id).then(response => {
+        await follow(this.$route.params.id, this.userName).then(response => {
           const { message } = response
           this.$message.success(message)
           this.hasFollowed = !this.hasFollowed
           this.userProfile.followerCount = parseInt(this.userProfile.followerCount) + 1
         })
       } else if(this.token != null && this.token !== '' && this.hasFollowed) {
-        await unFollow(this.$route.params.id).then(response => {
+        await unFollow(this.$route.params.id,this.userName).then(response => {
           const { message } = response
           this.$message.success(message)
           this.hasFollowed = !this.hasFollowed

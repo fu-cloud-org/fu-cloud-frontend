@@ -76,14 +76,15 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'token'
+      'token',
+        'userName'
     ])
   },
   methods: {
     fetchInfo() {
       if(this.token != null && this.token !== '')
       {
-        isFollowed(this.user.id).then(value => {
+        isFollowed(this.user.id, this.userName).then(value => {
           const { data } = value
           this.hasFollow = data.hasFollow
         })
@@ -95,7 +96,7 @@ export default {
     handleFollow: function(id) {
       if(this.token != null && this.token !== '')
       {
-        follow(id).then(response => {
+        follow(id,this.userName).then(response => {
           const { message } = response
           this.$message.success(message)
           this.hasFollow = !this.hasFollow
@@ -107,7 +108,7 @@ export default {
       }
     },
     handleUnFollow: function(id) {
-      unFollow(id).then(response => {
+      unFollow(id,this.userName).then(response => {
         const { message } = response
         this.$message.success(message)
         this.hasFollow = !this.hasFollow

@@ -140,13 +140,13 @@ export default {
     },
     follow(id, isMyFollowed) {
       if(this.token != null && this.token !== '' && !isMyFollowed){
-        follow(id).then(res => {
+        follow(id,this.user.username).then(res => {
           const {msg} = res;
           this.$message.success(msg);
           this.load();
         })
       } else if(this.token != null && this.token !== '' && isMyFollowed){
-        unFollow(id).then(res => {
+        unFollow(id,this.user.username).then(res => {
           const {msg} = res;
           this.$message.success(msg);
           this.load();

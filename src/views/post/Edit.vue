@@ -77,6 +77,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {ref} from "vue";
 import {attachImg} from "@/utils/attachImg";
+import {mapGetters} from "vuex";
 
 export default {
   name: "PostEdit",
@@ -96,6 +97,9 @@ export default {
   },
   created() {
     this.fetchPost();
+  },
+  computed: {
+    ...mapGetters(["userName"])
   },
   methods: {
     renderMarkdown(md) {
@@ -120,7 +124,7 @@ export default {
     },
     handleUpdate: function () {
       this.post.content = this.contentEditor.getValue();
-      update(this.post).then((response) => {
+      update(this.post,this.userName).then((response) => {
         const { data } = response;
         console.log(data);
         setTimeout(() => {
