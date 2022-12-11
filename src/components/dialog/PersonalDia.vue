@@ -67,6 +67,7 @@
 <script>
 import {getUserInfo, updateInfo} from "@/api/auth.js";
 import { attachImg} from "@/utils/attachImg";
+import {mapGetters} from "vuex";
 
 export default {
   name: "PersonalDia",
@@ -100,12 +101,15 @@ export default {
   mounted() {
     this.load();
   },
+  computed: {
+    ...mapGetters(["userName"]),
+  },
   methods: {
     open() {
       this.dialogVisible = true;
     },
     load() {
-      getUserInfo()
+      getUserInfo(this.userName)
           .then((res) => {
             console.log(res);
             Object.assign(this.form, res.data);

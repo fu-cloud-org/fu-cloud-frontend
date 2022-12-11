@@ -2,6 +2,19 @@ import Cookies from 'js-cookie'
 
 const uToken = 'u_token'
 const darkMode = 'dark_mode';
+const userName = 'userName';
+
+export function getUserName() {
+    return Cookies.get(userName)
+}
+
+export function setUserName(name) {
+    return Cookies.set(userName, name)
+}
+
+export function removeUserName() {
+    return Cookies.remove(userName)
+}
 
 // 获取Token
 export function getToken() {

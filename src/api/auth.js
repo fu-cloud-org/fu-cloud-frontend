@@ -24,10 +24,11 @@ export function login(data) {
     })
 }
 
-export function getUserInfo() {
+export function getUserInfo(userName) {
     return request({
         url: "/user/info",
         method: "get",
+        params: { userName: userName }
         // params: {token}
     })
 }
