@@ -1,4 +1,4 @@
-import {getUserInfo, login, logout} from "@/api/auth";
+import {getUserInfo, getUserInfoWhenLogin, login, logout} from "@/api/auth";
 import {getToken, getUserName, removeToken, setToken, setUserName} from "@/utils/auth";
 
 const state = {
@@ -41,7 +41,7 @@ const actions = {
     async getInfo({ commit, state }) {
         console.log("user:" + state.userName);
         return new Promise((resolve, reject) => {
-            getUserInfo(state.userName)
+            getUserInfoWhenLogin(state.userName)
                 .then((response) => {
                     const { data } = response;
                     console.log(data);
@@ -53,6 +53,8 @@ const actions = {
                         reject("Verification failed, please Login again.");
                     }
                     commit("SET_USER_STATE", data);
+                    commit("SET_USERNAME_STATE", data.username);
+                    setUserName(data.username);
                     resolve(data);
                 })
                 .catch((error) => {

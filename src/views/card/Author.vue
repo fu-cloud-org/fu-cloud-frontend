@@ -77,7 +77,7 @@ export default {
   computed: {
     ...mapGetters([
       'token',
-        'userName'
+      'userName'
     ])
   },
   methods: {

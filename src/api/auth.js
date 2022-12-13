@@ -33,6 +33,16 @@ export function getUserInfo(userName) {
     })
 }
 
+export function getUserInfoWhenLogin(userNameOrEmail){
+    return request({
+        url: "/user/loginInfo",
+        method: "get",
+        params: {
+            userNameOrEmail : userNameOrEmail
+        }
+    })
+}
+
 export function logout() {
     return request({
         url: "/user/logout",
